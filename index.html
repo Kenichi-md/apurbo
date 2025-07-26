@@ -1,41 +1,35 @@
-background: #00ff99;
+padding: 14px 40px;
+    background: #00ff99;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     color: #000;
-    font-weight: bold;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
-    box-shadow: 0 0 12px #00ff99;
+    box-shadow: 0 0 15px #00ff99;
     transition: 0.3s;
   }
   button:hover {
     background: #00cc77;
-    box-shadow: 0 0 15px #00cc77;
+    box-shadow: 0 0 20px #00cc77;
   }
   .note {
-    margin-top: 20px;
-    font-size: 0.9rem;
+    margin-top: 18px;
+    font-size: 0.95rem;
     color: #0f0;
   }
 </style>
 </head>
 <body>
-  <h1>kenichi-xd FB Video Downloader</h1>
-  <input type="text" id="fbUrl" placeholder="Paste Facebook Video URL here" />
+  <h1>KENICHI-XD Video Downloader</h1>
+  <input type="text" id="videoUrl" placeholder="Paste video URL here" />
   <button onclick="downloadVideo()">Download</button>
-  <p class="note">* Demo UI only. API/backend needed for actual download.</p>
+  <p class="note">* Demo UI only. API/backend integration needed for actual download.</p>
 
   <script>
     function downloadVideo() {
-      const url = document.getElementById('fbUrl').value.trim();
+      const url = document.getElementById('videoUrl').value.trim();
       if (!url) {
-        alert('Please enter a Facebook video URL!');
+        alert('Please enter a video URL!');
         return;
       }
-      // API বা ব্যাকএন্ড ডাউনলোড ফাংশন এখানে যুক্ত করতে হবে
-      alert('API integration required to download video.\nURL: ' + url);
-    }
-  </script>
-</body>
-</html>
-```
