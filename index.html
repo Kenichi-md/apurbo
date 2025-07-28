@@ -6,7 +6,7 @@
   <title>Apurbo Insta Reel Downloader</title>
   <style>
     body {
-      font-family: 'algol', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       background: #0d0d0d;
       margin: 0;
       padding: 0;
@@ -96,14 +96,13 @@
 </head>
 <body>
   <div class="container">
-<img src="https://files.catbox.moe/me3m0h.jpeg" alt="kenichi-md Logo" style="width: 120px; border-radius: 50%; margin-bottom: 20px;" />
-    <h1>🎀 Apurbo  
+    <h1>🙃 Apurbo  
       Insta Reel Downloader</h1>
     <input type="text" id="urlInput" placeholder="Paste Instagram Reel URL here...">
     <button onclick="fetchInstagramReel()">Download</button>
     <div id="result" class="result"></div>
-    <a href="https://wa.me/918967360566?text=⏤꯭֯ 🍷 𝐀𝐏𝐔𝐑𝐁𝐎-𝚾ᴅ ᥫ᭡⏤꯭֯_" class="whatsapp-button">🔥 KENICHI WhatsApp Support</a>
-    <div class="footer">CREATE BY ✅ KENICHI-XD</div>
+    <a href="https://wa.me/918967360566?text=⏤꯭֯ 🍷 𝐀𝐏𝐔𝐑𝐁𝐎-𝚾ᴅ ᥫ᭡⏤꯭֯_" class="whatsapp-button">🔥 MR-ORI WhatsApp Support</a>
+    <div class="footer">Create BY KENICHI-XD</div>
   </div>
 
   <script>
@@ -115,7 +114,7 @@
         alert("Please enter a valid URL");
         return;
       }
-      resultContainer.innerHTML = '<p>APURBO ⏳ Fetching...</p>';
+      resultContainer.innerHTML = '<p>MR-KeNicHi ⏳ Fetching...</p>';
       const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
       fetch(apiUrl)
         .then(response => response.json())
