@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MR.KENICHI yt.fb.insta video Downloader</title>
+  <title>Apurbo Insta Reel Downloader</title>
   <style>
     body {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Algol', sans-serif;
       background: #0d0d0d;
       margin: 0;
       padding: 0;
@@ -92,18 +92,17 @@
       color: #888;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://www.1001freefonts.com/algol.font/css2?family=Algol:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-<h2> APURBO 
-Paste your YT/FB/Insta/ 
-video link:</h2>
-  <input type="text" id="videoUrl" placeholder="Enter video URL here" style="width:300px;">
-  <button onclick="downloadVideo()">Download Video</button>
-<div id="result" class="result"></div>
-    <a href="https://wa.me/918967360566?text=⏤꯭͟͟͞͞⎯⃝APURBO DAS🥵💗➤⁩_" class="whatsapp-button">🔥 KENICHI WhatsApp Support</a>
-    <div class="footer">CREATE BY Kenichi...</div>
+    <h1>🔒 apurbo 
+      Insta Reel Downloader</h1>
+    <input type="text" id="urlInput" placeholder="Paste Instagram Reel URL here...">
+    <button onclick="fetchInstagramReel()">Download</button>
+    <div id="result" class="result"></div>
+    <a href="https://wa.me/918967360566?text=⏤꯭֯ 🍷 𝐀𝐏𝐔𝐑𝐁𝐎-𝚾ᴅ ᥫ᭡⏤꯭֯_" class="whatsapp-button">🔥 MR.kenichi... WhatsApp Support</a>
+    <div class="footer">create BY Kenichi...</div>
   </div>
 
   <script>
@@ -115,7 +114,7 @@ video link:</h2>
         alert("Please enter a valid URL");
         return;
       }
-      resultContainer.innerHTML = '<p>MR-kenichi... ⏳ Fetching...</p>';
+      resultContainer.innerHTML = '<p>Mr.kenichi ⏳ Fetching...</p>';
       const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
       fetch(apiUrl)
         .then(response => response.json())
