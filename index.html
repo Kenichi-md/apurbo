@@ -115,7 +115,7 @@ video link:</h2>
         alert("Please enter a valid URL");
         return;
       }
-      resultContainer.innerHTML = '<p>MR-kenichi... ⏳ </p>';
+      resultContainer.innerHTML = '<p>MR-kenichi... ⏳ Fetching...</p>';
       const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
       fetch(apiUrl)
         .then(response => response.json())
