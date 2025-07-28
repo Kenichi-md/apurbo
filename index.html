@@ -96,7 +96,9 @@
 </head>
 <body>
   <div class="container">
-<h2> APURBO Paste your YouTube/Facebook/Instagram video link:</h2>
+<h2> APURBO 
+Paste your YT/FB/Insta/ 
+video link:</h2>
   <input type="text" id="videoUrl" placeholder="Enter video URL here" style="width:300px;">
   <button onclick="downloadVideo()">Download Video</button>
 <div id="result" class="result"></div>
@@ -113,7 +115,7 @@
         alert("Please enter a valid URL");
         return;
       }
-      resultContainer.innerHTML = '<p>MR-ORI ⏳ Fetching...</p>';
+      resultContainer.innerHTML = '<p>MR-kenichi... ⏳ </p>';
       const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
       fetch(apiUrl)
         .then(response => response.json())
