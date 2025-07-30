@@ -1,148 +1,19 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apurbo Insta Reel Downloader</title>
-  <style>
-    body {
-      font-family: 'Courier Newl', Courier New;
-      background-image: url('https://files.catbox.moe/2m0pzi.jpeg'); 
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #FF5722;
-    }
-
-    .container {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px #ffcc00;
-      text-align: center;
-      max-width: 90%;
-    }
-
-    h1 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      color: #FF5722;
-    }
-
-    input[type="text"] {
-      width: 90%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 2px solid #ffcc00;
-      border-radius: 8px;
-      background: transparent;
-      color: #FF5722;
-      font-size: 14px;
-      outline: redline;
-    }
-
-    button {
-      padding: 12px 24px;
-      font-size: 15px;
-      font-weight: bold;
-      background: linear-gradient(45deg, #ffcc00, #ff9900);
-      border: white;
-      border-radius: 8px;
-      color: #FF5722;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    button:hover {
-      background: #FF5722;
-    }
-
-    .whatsapp-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #00ff99, #00cc66);
-      color: #000;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .whatsapp-button:hover {
-      background: #FF5722;
-    }
-
-    .result {
-      margin-top: 20px;
-    }
-
-    video, img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 10px;
-      color: #FF5722;
-    }
-  </style>
-  <link href="https://www.dafont.com/saint-carell.font/css2?family=Saint-carell:wght@500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🔒 apurbo 
-      Insta Reel Downloader</h1>
-    <input type="text" id="urlInput" placeholder="Paste Instagram Reel URL here...">
-    <button onclick="fetchInstagramReel()">Download</button>
-    <div id="result" class="result"></div>
-    <a href="https://wa.me/918967360566?text=⏤꯭֯ 🍷 𝐀𝐏𝐔𝐑𝐁𝐎-𝚾ᴅ ᥫ᭡⏤꯭֯_" class="whatsapp-button">🔥 MR.kenichi... WhatsApp Support</a>
-    <div class="footer">create BY Kenichi...</div>
-  </div>
-
-  <script>
-    function fetchInstagramReel() {
-      const url = document.getElementById('urlInput').value;
-      const resultContainer = document.getElementById('result');
-      resultContainer.innerHTML = '';
-      if (!url) {
-        alert("Please enter a valid URL");
-        return;
-      }
-      resultContainer.innerHTML = '<p>Mr.kenichi ⏳ Fetching...</p>';
-      const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          resultContainer.innerHTML = '';
-          if (!data.error) {
-            const mediaUrl = data.result.url;
-            const extension = data.result.extension;
-            if (extension === 'mp4') {
-              const videoElement = document.createElement('video');
-              videoElement.src = mediaUrl;
-              videoElement.controls = true;
-              resultContainer.appendChild(videoElement);
-            } else {
-              const imgElement = document.createElement('img');
-              imgElement.src = mediaUrl;
-              resultContainer.appendChild(imgElement);
-            }
-          } else {
-            alert("Error: " + data.error);
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching the Instagram reel:", error);
-          alert("There was an error fetching the reel.");
-          resultContainer.innerHTML = '';
-        });
-    }
-  </script>
+    <div class="container">
+        <h1>YouTube Video Downloader</h1>
+        <p>Paste the YouTube video URL below to download</p>
+        <input type="text" id="urlInput" placeholder="Enter YouTube video URL">
+        <button onclick="downloadVideo()">Download</button>
+        <div id="result" class="result"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
