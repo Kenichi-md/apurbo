@@ -1,179 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ Insta Reel Downloader</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KENICHI-XD</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'anime-red': '#ff0033',
+            'anime-dark': '#0a0a0a',
+          },
+          animation: {
+            'spin-slow': 'spin 3s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2s infinite',
+            'fade-out': 'fadeOut 1s ease-out forwards',
+            'shimmer': 'shimmer 1.5s infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 10px #ff0033, 0 0 20px #ff0033' },
+              '50%': { boxShadow: '0 0 20px #ff0033, 0 0 40px #ff0033' },
+            },
+            fadeOut: {
+              '0%': { opacity: '1', visibility: 'visible' },
+              '100%': { opacity: '0', visibility: 'hidden' },
+            },
+            shimmer: {
+              '100%': { transform: 'translateX(100%)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
     body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .tech-font {
       font-family: 'Orbitron', sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #fff;
     }
-      video#bgVideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      object-fit: cover;
+
+    ::-webkit-scrollbar {
+      width: 8px;
     }
-    .content {
-      position: relative;
-      z-index: 1;
-      color: white;
-      text-align: center;
+    ::-webkit-scrollbar-track {
+      background: #000; 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff0033; 
+      border-radius: 4px;
+    }
+
+    /* Rotating Border Animation */
+    @property --angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    .rotating-border::after, .rotating-border::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-image: conic-gradient(from var(--angle), transparent 70%, #ff0033);
       top: 50%;
-      transform: translateY(-50%);
-      font-size: 24px;
-      font-family: sans-serif;
+      left: 50%;
+      translate: -50% -50%;
+      z-index: -1;
+      padding: 3px;
+      border-radius: 9999px;
+      animation: spin-border 3s linear infinite;
     }
     
- </style>
-</head>
-<body>
-    
-  <!-- Background Video -->
-  <video autoplay muted loop id="bgVideo">
-    <source src="https://files.catbox.moe/hih6pk.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  
-  <style>
-    body 
-     .container {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px #ffcc00;
-      text-align: center;
-      max-width: 90%;
-    }
-    
-      h1 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      color: #ffcc00;
+    .rotating-border::before {
+      filter: blur(1.5rem);
+      opacity: 0.5;
     }
 
-    input[type="text"] {
-      width: 90%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 2px solid #ffcc00;
-      border-radius: 8px;
-      background: transparent;
-      color: #fff;
-      font-size: 14px;
-      outline: none;
+    @keyframes spin-border {
+      from { --angle: 0deg; }
+      to { --angle: 360deg; }
     }
 
-    button {
-      padding: 12px 24px;
-      font-size: 15px;
-      font-weight: bold;
-      background: linear-gradient(45deg, #ffcc00, #ff9900);
-      border: none;
-      border-radius: 8px;
-      color: #000;
-      cursor: pointer;
-      transition: 0.3s ease;
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      background: #ff0033;
+      border-radius: 50%;
+      opacity: 0;
+      animation: rise 10s infinite ease-in;
     }
-
-    button:hover {
-      background: #ffaa00;
-    }
-
-    .whatsapp-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #00ff00, #00cc66);
-      color: #000;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .whatsapp-button:hover {
-      background: #00ff00;
-    }
-
-    .result {
-      margin-top: 20px;
-    }
-
-    video, img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #888;
+    @keyframes rise {
+      0% { bottom: -100px; transform: translateX(0); opacity: 0; }
+      50% { opacity: 0.6; }
+      100% { bottom: 100vh; transform: translateX(100px); opacity: 0; }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
-  <div class="container">
-    <img src="https://files.catbox.moe/me3m0h.jpeg" alt="KENICHI Logo" style="width: 120px; border-radius: 50%; margin-bottom: 20px;" />
-    <h1>🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ🔥</h1> 
-    <h3>INSTA REEL DOWNLOADER</h3>
-    <input type="text" id="urlInput" placeholder="Paste Instagram Reel URL here...">
-    <button onclick="fetchInstagramReel()">Download Kenichi</button>
-    <div id="result" class="result"></div>
-    <a href="https://wa.me/918967360566?text=🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ🔥 " class="whatsapp-button">🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ)꯭🔥 WhatsApp contact</a>
-    <div class="footer"> apurbo </div>
+<body class="bg-black min-h-screen text-white relative">
+
+  <div id="loading-screen" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-opacity duration-700">
+    <div class="relative w-24 h-24">
+      <div class="absolute inset-0 border-4 border-t-anime-red border-r-transparent border-b-anime-red border-l-transparent rounded-full animate-spin"></div>
+      <div class="absolute inset-2 border-4 border-t-white border-r-transparent border-b-white border-l-transparent rounded-full animate-spin-slow"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <i class="fas fa-bolt text-anime-red text-2xl animate-pulse"></i>
+      </div>
+    </div>
+    <h2 class="mt-4 text-2xl tech-font text-white tracking-widest">INITIALIZING...</h2>
+  </div>
+  <div id="app">
+    <div class="fixed inset-0 z-0 overflow-hidden">
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-80">
+      <source src="https://cdn.jsdelivr.net/gh/thilina32/lisa-md/lv_0_20260104183800.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-[#1a0000]/80 to-black/60 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-[#ff0033]/10 mix-blend-overlay"></div>
+    <div id="particles-container" class="relative z-10 opacity-50"></div>
   </div>
 
+  <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 gap-6">
+    
+    <div class="w-full max-w-sm bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-[0_0_50px_rgba(255,0,51,0.2)] transform transition-all duration-500 hover:scale-[1.01] overflow-hidden group">
+      
+    <div class="w-full max-w-sm rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(255,0,51,0.15)] bg-black/50 backdrop-blur-sm relative group">
+       <img src="https://cdn.jsdelivr.net/gh/thilina32/lisa-md/IMG-20251209-WA0007.jpg" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity"/>
+    </div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-anime-red to-transparent"></div>
+
+      <div class="text-center mb-6">
+        <div class="relative inline-block">
+          <div class="absolute inset-0 bg-anime-red blur-xl opacity-20 rounded-full"></div>
+          <i class="fas fa-user-astronaut text-4xl text-white drop-shadow-[0_0_10px_rgba(255,0,51,0.8)] mb-3 relative z-10"></i>
+        </div>
+        <h1 class="text-2xl font-bold tech-font text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+          LISA MD
+        </h1>
+        <p class="text-anime-red text-xs tracking-[0.3em] font-bold mt-1 uppercase opacity-80">Device Pairing</p>
+      </div>
+
+      <div class="space-y-5">
+        <div class="text-center text-gray-400 text-[10px] uppercase tracking-wider mb-1">Enter WhatsApp Number</div>
+        
+        <div class="relative w-full h-12 rounded-full flex items-center justify-center rotating-border isolate">
+           <div class="absolute inset-[2px] bg-black/80 rounded-full z-10 flex items-center px-4 backdrop-blur-md">
+             <span class="text-gray-400 mr-2"><i class="fas fa-phone text-sm"></i></span>
+             <input 
+               type="text" 
+               id="number" 
+               placeholder="947xxxxxxxx" 
+               class="w-full bg-transparent border-none outline-none text-white placeholder-gray-600 font-mono text-md tracking-wide"
+             >
+           </div>
+        </div>
+
+        <button id="submit" class="w-full group relative px-6 py-3 rounded-full bg-gradient-to-r from-[#990000] to-[#ff0033] text-white font-bold tracking-wider overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(255,0,51,0.6)] active:scale-95 text-sm">
+          <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+          <span class="relative flex items-center justify-center gap-2">
+            GET CODE <i class="fas fa-chevron-right text-xs"></i>
+          </span>
+        </button>
+
+        <div id="loading-spinner" class="hidden text-center py-2">
+            <i class="fas fa-circle-notch fa-spin text-anime-red text-xl"></i>
+            <p class="text-[10px] text-gray-500 mt-2 animate-pulse">Connecting...</p>
+        </div>
+
+        <main id="pair" class="min-h-[40px] flex items-center justify-center text-center"></main>
+      </div>
+
+      <div class="mt-6 pt-3 border-t border-white/5 text-center">
+        <p class="text-[9px] text-gray-500">POWERED BY <span class="text-anime-red font-bold">APURBO-TECH</span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <button onclick="openModal()" class="fixed bottom-6 right-6 w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,255,0,0.4)] hover:scale-110 transition-transform z-50 group">
+    <i class="fab fa-whatsapp text-xl group-hover:rotate-[360deg] transition-transform duration-500"></i>
+  </button>
+
+  <div id="contactModal" class="fixed inset-0 z-[60] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+    <div class="bg-gray-900 border border-white/10 p-8 rounded-2xl w-11/12 max-w-sm transform scale-90 transition-transform duration-300 shadow-[0_0_40px_rgba(255,0,51,0.1)]" id="modalContent">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl text-white tech-font tracking-wide">Community</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-red-500 transition-colors"><i class="fas fa-times text-xl"></i></button>
+      </div>
+      
+      <div class="space-y-3">
+        <a href="https://wa.me/94766519895" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5 group">
+            <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shadow-[0_0_10px_rgba(0,255,0,0.3)]">
+                <i class="fab fa-whatsapp text-white text-lg"></i>
+            </div>
+            <div>
+                <div class="text-white font-bold text-sm group-hover:text-green-400 transition-colors">Chat on WhatsApp</div>
+                <div class="text-[10px] text-gray-500">Contact Developer</div>
+            </div>
+        </a>
+
+        <a href="https://whatsapp.com/channel/0029Vb5gYFTDp2PztSenpB14" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5 group relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-anime-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="w-10 h-10 rounded-full bg-anime-red flex items-center justify-center shadow-[0_0_15px_#ff0033] relative z-10">
+                <i class="fas fa-bullhorn text-white text-sm animate-pulse"></i>
+            </div>
+            <div class="relative z-10">
+                <div class="text-white font-bold text-sm group-hover:text-anime-red transition-colors">Join Official Channel</div>
+                <div class="text-[10px] text-gray-500">Get Updates & News</div>
+            </div>
+            <i class="fas fa-chevron-right absolute right-4 text-gray-600 group-hover:text-white transition-colors text-xs"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  
   <script>
-    function fetchInstagramReel() {
-      const url = document.getElementById('urlInput').value;
-      const resultContainer = document.getElementById('result');
-      resultContainer.innerHTML = '';
-      if (!url) {
-        alert("Please enter a valid URL");
-        return;
-      }
-      resultContainer.innerHTML = '<p>APURBO 🌀 Fetching...</p>';
-      const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          resultContainer.innerHTML = '';
-          if (!data.error) {
-            const mediaUrl = data.result.url;
-            const extension = data.result.extension;
-            if (extension === 'mp4') {
-              const videoElement = document.createElement('video');
-              videoElement.src = mediaUrl;
-              videoElement.controls = true;
-              resultContainer.appendChild(videoElement);
-            } else {
-              const imgElement = document.createElement('img');
-              imgElement.src = mediaUrl;
-              resultContainer.appendChild(imgElement);
-            }
-          } else {
-            alert("Error: " + data.error);
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching the Instagram reel:", error);
-          alert("There was an error fetching the reel.");
-          resultContainer.innerHTML = '';
-        });
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+          
+            const loader = document.getElementById('loading-screen');
+            loader.classList.add('animate-fade-out');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+        }, 2000);
+    });
+
+    // Particles
+    const particleContainer = document.getElementById('particles-container');
+    for(let i=0; i<15; i++) {
+        const div = document.createElement('div');
+        div.classList.add('particle');
+        div.style.left = Math.random() * 100 + 'vw';
+        div.style.width = Math.random() * 4 + 'px';
+        div.style.height = div.style.width;
+        div.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        div.style.animationDelay = (Math.random() * 5) + 's';
+        particleContainer.appendChild(div);
     }
+
+    const modal = document.getElementById('contactModal');
+    const modalContent = document.getElementById('modalContent');
+    function openModal() {
+        modal.classList.remove('hidden');
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0');
+        modalContent.classList.remove('scale-90');
+        modalContent.classList.add('scale-100');
+    }
+    function closeModal() {
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-90');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+
+    // Pair Logic
+    let a = document.getElementById("pair");
+    let b = document.getElementById("submit");
+    let c = document.getElementById("number");
+
+    async function Copy() {
+      let text = document.getElementById("copy").innerText;
+      let obj = document.getElementById("copy");
+      await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
+      obj.innerHTML = '<i class="fas fa-check"></i> COPIED';
+      obj.classList.add('text-green-500');
+      setTimeout(() => {
+        obj.innerText = text;
+        obj.classList.remove('text-green-500');
+      }, 1000);
+    }
+
+    b.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (!c.value) {
+        a.innerHTML = '<div class="text-red-500 bg-red-500/10 p-3 rounded-lg text-xs border border-red-500/30"><i class="fas fa-exclamation-circle"></i> Enter your whatsapp number!</div>';
+      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
+        a.innerHTML = '<div class="text-red-500 bg-red-500/10 p-3 rounded-lg text-xs border border-red-500/30"><i class="fas fa-exclamation-circle"></i> Invalid number format!</div>';
+      } else {
+        const bc = c.value.replace(/[^0-9]/g, "");
+        let bb = "";
+        let bbc = "";
+        const cc = bc.split('');
+        cc.map(a => {
+          bbc += a;
+          if (bbc.length == 3) { bb += " " + a; }
+          else if (bbc.length == 8) { bb += " " + a; }
+          else { bb += a; }
+        });
+        c.type = "text";
+        c.value = "+" + bb;
+        
+        document.getElementById("loading-spinner").style.display = "block";
+        b.disabled = true;
+        b.classList.add('opacity-50', 'cursor-not-allowed');
+        a.innerHTML = '';
+        
+        try {
+          let { data } = await axios(`/code?number=${bc}`);
+          let code = data?.result || data?.error || "Unavailable";
+          
+          a.innerHTML = `
+            <div class="w-full bg-white/5 border border-anime-red/50 rounded-xl p-3 cursor-pointer hover:bg-white/10 transition-all" onclick="Copy()">
+                <p class="text-gray-400 text-[10px] mb-1">PAIRING CODE</p>
+                <div id="copy" class="text-xl font-bold text-white tracking-[0.2em] font-mono shadow-red-glow">${code}</div>
+                <p class="text-[9px] text-anime-red mt-1">TAP TO COPY</p>
+            </div>
+          `;
+        } catch (error) {
+             a.innerHTML = '<div class="text-red-500 bg-red-500/10 p-3 rounded-lg text-xs border border-red-500/30"><i class="fas fa-wifi"></i> Service Unavailable</div>';
+        }
+
+        document.getElementById("loading-spinner").style.display = "none";
+        b.disabled = false;
+        b.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    });
   </script>
 </body>
 </html>
