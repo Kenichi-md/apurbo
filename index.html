@@ -1,118 +1,182 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ Insta Reel Downloader</title>
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #fff;
+    }
+      video#bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      font-family: sans-serif;
+    }
+    
+ </style>
+</head>
+<body>
+    
+  <!-- Background Video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="https://files.catbox.moe/hih6pk.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  
+  <style>
+    body 
+     .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #ffcc00;
+      text-align: center;
+      max-width: 90%;
+    }
+    
+      h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
 
-    <meta charset="UTF-8">
+    input[type="text"] {
+      width: 90%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #ffcc00;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    button {
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ffcc00, #ff9900);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
 
-    <title>Nebula Panle | Secure Deployment</title>
+    button:hover {
+      background: #ffaa00;
+    }
 
-    <script src="https://www.highperformanceformat.com/7aced95d52d4f2b6020c43a103171bb7/invoke.js"></script>
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #00ff00, #00cc66);
+      color: #000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    .whatsapp-button:hover {
+      background: #00ff00;
+    }
 
-    <style>
+    .result {
+      margin-top: 20px;
+    }
 
-        :root {
+    video, img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
 
-            --nebula-blue: #3b82f6;
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <img src="https://files.catbox.moe/me3m0h.jpeg" alt="KENICHI Logo" style="width: 120px; border-radius: 50%; margin-bottom: 20px;" />
+    <h1>🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ🔥</h1> 
+    <h3>INSTA REEL DOWNLOADER</h3>
+    <input type="text" id="urlInput" placeholder="Paste Instagram Reel URL here...">
+    <button onclick="fetchInstagramReel()">Download Kenichi</button>
+    <div id="result" class="result"></div>
+    <a href="https://wa.me/918967360566?text=🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ🔥 " class="whatsapp-button">🔥꯭𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ)꯭🔥 WhatsApp contact</a>
+    <div class="footer"> 𝐀ᴘ꯭ᴜ꯭ʀ꯭ʙ꯭ᴏ|-✘ᴅ</div>
+  </div>
 
-            --nebula-purple: #8b5cf6;
-
-            --deep-space: #030711;
-
-            --glass-bg: rgba(10, 15, 25, 0.75);
-
-            --glass-border: rgba(255, 255, 255, 0.08);
-
-            --neon-accent: #60a5fa;
-
-        }
-
-
-
-        * {
-
-            box-sizing: border-box;
-
-            -webkit-font-smoothing: antialiased;
-
-            margin: 0;
-
-            padding: 0;
-
-        }
-
-
-
-        body { 
-
-            background-color: var(--deep-space);
-
-            color: #f1f5f9; 
-
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-
-            display: flex; 
-
-            justify-content: center; 
-
-            align-items: center;
-
-            min-height: 100vh;
-
-            overflow: hidden;
-
-            position: relative;
-
-        }
-
-
-
-        /* Dark Ambient Overlays */
-
-        body::before {
-
-            content: "";
-
-            position: absolute;
-
-            inset: 0;
-
-            background: radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
-
-                        radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
-
-            z-index: -2;
-
-            pointer-events: none;
-
-        }
-
-
-
-        #nebulaCanvas {
-
-            position: fixed;
-
-            top: 0;
-
-            left: 0;
-
-            width: 100%;
-
-            height: 100%;
-
-            z-index: -1;
-
-            pointer-events: none;
-
-        }
-
-
+  <script>
+    function fetchInstagramReel() {
+      const url = document.getElementById('urlInput').value;
+      const resultContainer = document.getElementById('result');
+      resultContainer.innerHTML = '';
+      if (!url) {
+        alert("Please enter a valid URL");
+        return;
+      }
+      resultContainer.innerHTML = '<p>APURBO 🌀 Fetching...</p>';
+      const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          resultContainer.innerHTML = '';
+          if (!data.error) {
+            const mediaUrl = data.result.url;
+            const extension = data.result.extension;
+            if (extension === 'mp4') {
+              const videoElement = document.createElement('video');
+              videoElement.src = mediaUrl;
+              videoElement.controls = true;
+              resultContainer.appendChild(videoElement);
+            } else {
+              const imgElement = document.createElement('img');
+              imgElement.src = mediaUrl;
+              resultContainer.appendChild(imgElement);
+            }
+          } else {
+            alert("Error: " + data.error);
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching the Instagram reel:", error);
+          alert("There was an error fetching the reel.");
+          resultContainer.innerHTML = '';
+        });
+    }
+  </script>
+</body>
+</html>
 
         /* Ultra-Glossy Panel */
 
