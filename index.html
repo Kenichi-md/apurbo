@@ -1,118 +1,1100 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DTZ - Dark Tech Zone</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-:root{
-  --bg:#0a0a16;
-  --card:rgba(20,25,40,.85);
-  --text:#fff;
-  --sub:#bbb;
-  --accent:#1e90ff;
-}
-body.light{
-  --bg:#f4f6fb;
-  --card:#fff;
-  --text:#111;
-  --sub:#555;
-  --accent:#0066cc;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Segoe UI,Tahoma,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:.3s;
-  overflow-x:hidden;
-  position:relative;
-}
 
-/* Loading Animation */
-.loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #0a0a16 0%, #0f1420 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
+    <meta charset="UTF-8">
 
-.loading-screen.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* Cube Loader */
-.cube-loader {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  transform-style: preserve-3d;
-  transform: rotateX(-30deg) rotateY(45deg);
-  animation: cubeRotate 3s infinite linear;
-}
+    <title>Nebula Panle | Secure Deployment</title>
 
-.cube-face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(30, 144, 255, 0.2);
-  border: 2px solid rgba(30, 144, 255, 0.8);
-  box-shadow: 0 0 20px rgba(30, 144, 255, 0.5), 
-              inset 0 0 20px rgba(30, 144, 255, 0.2);
-}
+    <script src="https://www.highperformanceformat.com/7aced95d52d4f2b6020c43a103171bb7/invoke.js"></script>
 
-.cube-face-front {
-  transform: translateZ(50px);
-  background: linear-gradient(45deg, rgba(30, 144, 255, 0.3), rgba(0, 102, 204, 0.3));
-}
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-.cube-face-back {
-  transform: translateZ(-50px) rotateY(180deg);
-  background: linear-gradient(45deg, rgba(30, 144, 255, 0.3), rgba(0, 102, 204, 0.3));
-}
+    <style>
 
-.cube-face-right {
-  transform: translateX(50px) rotateY(90deg);
-  background: linear-gradient(45deg, rgba(30, 144, 255, 0.25), rgba(0, 102, 204, 0.25));
-}
+        :root {
 
-.cube-face-left {
-  transform: translateX(-50px) rotateY(-90deg);
-  background: linear-gradient(45deg, rgba(30, 144, 255, 0.25), rgba(0, 102, 204, 0.25));
-}
+            --nebula-blue: #3b82f6;
 
-.cube-face-top {
-  transform: translateY(-50px) rotateX(90deg);
-  background: linear-gradient(45deg, rgba(30, 144, 255, 0.2), rgba(0, 102, 204, 0.2));
-}
+            --nebula-purple: #8b5cf6;
 
-.cube-face-bottom {
-  transform: translateY(50px) rotateX(-90deg);
-  background: linear-gradient(45deg, rgba(30, 144, 255, 0.2), rgba(0, 102, 204, 0.2));
-}
+            --deep-space: #030711;
 
-.cube-inner {
-  position: absolute;
-  width: 60%;
-  height: 60%;
-  top: 20%;
-  left: 20%;
-  transform-style: preserve-3d;
-  transform: rotateX(-30deg) rotateY(45deg);
-  animation: cubeRotate 2s infinite linear reverse;
-}
+            --glass-bg: rgba(10, 15, 25, 0.75);
 
-.inner-face {
+            --glass-border: rgba(255, 255, 255, 0.08);
+
+            --neon-accent: #60a5fa;
+
+        }
+
+
+
+        * {
+
+            box-sizing: border-box;
+
+            -webkit-font-smoothing: antialiased;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+
+        body { 
+
+            background-color: var(--deep-space);
+
+            color: #f1f5f9; 
+
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+
+            display: flex; 
+
+            justify-content: center; 
+
+            align-items: center;
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            position: relative;
+
+        }
+
+
+
+        /* Dark Ambient Overlays */
+
+        body::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background: radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+
+                        radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+
+            z-index: -2;
+
+            pointer-events: none;
+
+        }
+
+
+
+        #nebulaCanvas {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            z-index: -1;
+
+            pointer-events: none;
+
+        }
+
+
+
+        /* Ultra-Glossy Panel */
+
+        .panel { 
+
+            background: var(--glass-bg);
+
+            backdrop-filter: blur(30px) saturate(200%);
+
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+
+            padding: 40px; 
+
+            border-radius: 40px; 
+
+            width: 92%;
+
+            max-width: 480px; 
+
+            /* Added margin for mobile spacing */
+
+            margin: 20px auto;
+
+            box-shadow: 
+
+                0 0 0 1px var(--glass-border),
+
+                0 40px 100px -20px rgba(0, 0, 0, 0.8),
+
+                inset 0 1px 1px rgba(255, 255, 255, 0.15); 
+
+            position: relative;
+
+            z-index: 10;
+
+            animation: panelSlideUp 1s cubic-bezier(0.2, 1, 0.3, 1);
+
+        }
+
+
+
+        @keyframes panelSlideUp {
+
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+
+            to { opacity: 1; transform: translateY(0) scale(1); }
+
+        }
+
+
+
+        .header-section {
+
+            text-align: center;
+
+            margin-bottom: 32px;
+
+        }
+
+
+
+        h2 { 
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+            font-size: 32px;
+
+            margin-bottom: 12px;
+
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+
+        p.subtitle { 
+
+            color: #94a3b8; 
+
+            font-size: 14px; 
+
+            font-weight: 400;
+
+            line-height: 1.6;
+
+            opacity: 0.9;
+
+        }
+
+
+
+        .highlight-text {
+
+            color: var(--neon-accent);
+
+            font-weight: 600;
+
+        }
+
+
+
+        .field-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+
+        }
+
+
+
+        .field { position: relative; }
+
+        
+
+        label { 
+
+            display: block; 
+
+            font-size: 10px; 
+
+            color: var(--neon-accent); 
+
+            margin-bottom: 8px; 
+
+            font-weight: 800;
+
+            text-transform: uppercase; 
+
+            letter-spacing: 2px;
+
+            margin-left: 4px;
+
+        }
+
+
+
+        input, select { 
+
+            width: 100%; 
+
+            padding: 14px 20px; 
+
+            background: rgba(0, 0, 0, 0.4); 
+
+            border: 1px solid var(--glass-border); 
+
+            color: #fff; 
+
+            border-radius: 16px; 
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            outline: none;
+
+            font-family: inherit;
+
+        }
+
+
+
+        input:focus, select:focus {
+
+            background: rgba(0, 0, 0, 0.6);
+
+            border-color: var(--nebula-blue);
+
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), 0 0 20px rgba(59, 130, 246, 0.1);
+
+        }
+
+
+
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+
+
+        /* Modern Premium Button */
+
+        button { 
+
+            width: 100%; 
+
+            padding: 18px; 
+
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6); 
+
+            color: white; 
+
+            border: none; 
+
+            border-radius: 18px; 
+
+            font-weight: 800; 
+
+            font-size: 15px;
+
+            cursor: pointer; 
+
+            margin-top: 12px; 
+
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.5);
+
+            position: relative;
+
+            overflow: hidden;
+
+            letter-spacing: 0.5px;
+
+            text-transform: uppercase;
+
+        }
+
+
+
+        button::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+
+            transition: 0.5s;
+
+        }
+
+
+
+        button:hover { 
+
+            transform: translateY(-4px) scale(1.02);
+
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.6);
+
+        }
+
+
+
+        button:hover::before {
+
+            left: 100%;
+
+        }
+
+
+
+        button:active { transform: translateY(0) scale(1); }
+
+
+
+        button:disabled {
+
+            opacity: 0.5;
+
+            cursor: not-allowed;
+
+            transform: none !important;
+
+            box-shadow: none;
+
+        }
+
+
+
+        .success-card { 
+
+            background: rgba(16, 185, 129, 0.08); 
+
+            border: 1px solid rgba(16, 185, 129, 0.3); 
+
+            padding: 24px; 
+
+            border-radius: 24px; 
+
+            margin-top: 24px; 
+
+            display: none; 
+
+            animation: cardAppear 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+
+            backdrop-filter: blur(10px);
+
+        }
+
+
+
+        @keyframes cardAppear {
+
+            from { opacity: 0; transform: translateY(10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+
+
+        .data-label { color: #94a3b8; font-size: 12px; margin-bottom: 4px; font-weight: 600; }
+
+        .data-value { font-family: 'ui-monospace', monospace; color: #4ade80; font-size: 14px; margin-bottom: 12px; }
+
+        
+
+        a.panel-link {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-top: 12px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            background: rgba(255,255,255,0.05);
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+
+        }
+
+        a.panel-link:hover { background: rgba(255,255,255,0.1); }
+
+        /* --- Uptime Status Styles --- */
+
+        .status-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 16px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+
+        .status-box {
+
+            background: rgba(255, 255, 255, 0.03);
+
+            border: 1px solid var(--glass-border);
+
+            padding: 12px 16px;
+
+            border-radius: 16px;
+
+        }
+
+
+
+        .status-label {
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            color: #94a3b8;
+
+            margin-bottom: 4px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .status-val {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #fff;
+
+        }
+
+
+
+        /* Pulse Animation */
+
+        .pulse-dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            background-color: #4ade80;
+
+            border-radius: 50%;
+
+            display: inline-block;
+
+            box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+
+            animation: pulse 2s infinite;
+
+        }
+
+
+
+        .offline .pulse-dot {
+
+            background-color: #f87171;
+
+            box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.7);
+
+        }
+
+
+
+        @keyframes pulse {
+
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+
+        }
+
+        /* Custom Scrollbar for Selects */
+
+        select option { background: #0f172a; color: white; }
+
+
+
+            /* NEW RESPONSIVE OVERRIDES */
+
+            @media (max-width: 480px) {
+
+                body {
+
+                    /* Allows the panel to scroll on very short phones */
+
+                    overflow-y: auto;
+
+                    align-items: flex-start; /* Prevents being cut off at the top */
+
+                    padding-top: 20px;
+
+                }
+
+
+
+                .panel { 
+
+                    padding: 24px; 
+
+                    border-radius: 28px; /* Slightly smaller radius looks better on small screens */
+
+                    width: 95%;
+
+                }
+
+
+
+                h2 { 
+
+                    font-size: 24px; 
+
+                    letter-spacing: -1px;
+
+                }
+
+
+
+                .subtitle {
+
+                    font-size: 13px;
+
+                }
+
+
+
+                /* Stack all columns into a single list */
+
+                .row { 
+
+                    grid-template-columns: 1fr; 
+
+                    gap: 20px; 
+
+                }
+
+
+
+                input, select, button {
+
+                    /* Prevents iOS from zooming in on focus */
+
+                    font-size: 16px !important; 
+
+                    padding: 16px;
+
+                }
+
+
+
+                .success-card {
+
+                    padding: 16px;
+
+                }
+
+            }
+
+    </style>
+
+</head>
+
+    
+
+<body>
+
+    <canvas id="nebulaCanvas"></canvas>
+
+
+
+<div class="panel">
+
+    <div class="header-section">
+
+        <h2>🚀 Nebula Panel</h2>
+
+        <p class="subtitle">
+
+            Secure high-performance infrastructure orchestration.<br>
+
+            Current license: <span class="highlight-text">1-Day Deployment</span>.
+
+        </p>
+
+    </div>
+
+    <div class="status-grid">
+
+        <div class="status-box">
+
+            <div class="status-label">System Health</div>
+
+            <div id="statusIndicator" class="status-val">
+
+                <span class="pulse-dot"></span>Checking...
+
+            </div>
+
+        </div>
+
+        <div class="status-box">
+
+            <div class="status-label">24h Uptime</div>
+
+            <div id="uptimePercent" class="status-val">--%</div>
+
+        </div>
+
+    </div>
+
+    <div class="field-group">
+
+        <div class="field">
+
+            <label>Deployment Hash</label>
+
+            <input type="text" id="hashKey" placeholder="Base64 Deployment (4500)">
+
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Username</label>
+
+                <input type="text" id="username" placeholder="pilot_one">
+
+            </div>
+
+            <div class="field">
+
+                <label>Server Name</label>
+
+                <input type="text" id="sname" placeholder="Nebula-1">
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+
+            <div class="field">
+
+                <label>Memory Pool</label>
+
+                <select id="ram">
+
+                    <option value="500">500MB DDR4</option>
+
+                </select>
+
+            </div>
+
+            <div class="field">
+
+                <label>NVMe Storage</label>
+
+                <select id="disk">
+
+                    <option value="500">500MB High-Speed</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <button id="mainBtn" onclick="deploy()">Create Server</button>
+
+    </div>
+
+
+
+    <div id="result" class="success-card"></div>
+
+</div>
+
+
+
+<script>
+
+    const canvas = document.getElementById('nebulaCanvas');
+
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+
+    const particleCount = 120;
+
+
+
+    function initCanvas() {
+
+        canvas.width = window.innerWidth;
+
+        canvas.height = window.innerHeight;
+
+    }
+
+
+
+    class Particle {
+
+        constructor() { this.reset(); }
+
+        reset() {
+
+            this.x = Math.random() * canvas.width;
+
+            this.y = Math.random() * canvas.height;
+
+            this.size = Math.random() * 2 + 0.1;
+
+            this.speedX = (Math.random() - 0.5) * 0.1;
+
+            this.speedY = (Math.random() - 0.5) * 0.1;
+
+            this.opacity = Math.random() * 0.5 + 0.1;
+
+            this.color = ['#3b82f6', '#8b5cf6', '#ffffff'][Math.floor(Math.random() * 3)];
+
+        }
+
+        update() {
+
+            this.x += this.speedX;
+
+            this.y += this.speedY;
+
+            if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+
+        }
+
+        draw() {
+
+            ctx.beginPath();
+
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+            ctx.fillStyle = this.color;
+
+            ctx.globalAlpha = this.opacity;
+
+            ctx.fill();
+
+        }
+
+    }
+
+
+
+    function createParticles() {
+
+        particles = [];
+
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+    }
+
+
+
+    function animate() {
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => { p.update(); p.draw(); });
+
+        requestAnimationFrame(animate);
+
+    }
+
+
+
+    window.addEventListener('resize', () => { initCanvas(); createParticles(); });
+
+    initCanvas();
+
+    createParticles();
+
+    animate();
+
+
+
+    const API = "https://panel-create.vercel.app/api";
+
+
+
+    /* --- UPTIME ROBOT INTEGRATION --- */
+
+    async function fetchStatus() {
+
+        const indicator = document.getElementById('statusIndicator');
+
+        const uptimeBox = document.getElementById('uptimePercent');
+
+
+
+        try {
+
+            // Calling your backend API
+
+            const response = await fetch(`https://panel-create.vercel.app/api/status`);
+
+            const data = await response.json();
+
+
+
+            if (data.success) {
+
+                if (data.status === 2) { // 2 usually means "Up" in Uptime Robot
+
+                    indicator.className = "status-val online";
+
+                    indicator.innerHTML = `<span class="pulse-dot"></span>OPERATIONAL`;
+
+                    indicator.style.color = "#4ade80"; // Success Green
+
+                } else {
+
+                    indicator.className = "status-val offline";
+
+                    indicator.innerHTML = `<span class="pulse-dot"></span>SYSTEM DOWN`;
+
+                    indicator.style.color = "#f87171"; // Error Red
+
+                }
+
+                uptimeBox.innerText = data.ratio + "%";
+
+            }
+
+        } catch (error) {
+
+            console.error("Status check failed", error);
+
+            indicator.innerHTML = "OFFLINE";
+
+            indicator.style.color = "#f87171";
+
+        }
+
+    }
+
+
+
+    // Initialize status on load
+
+    fetchStatus();
+
+    // Optional: Refresh status every 60 seconds
+
+    setInterval(fetchStatus, 60000);
+
+    async function deploy() {
+
+        const btn = document.getElementById('mainBtn');
+
+        const hash = document.getElementById('hashKey').value;
+
+        const user = document.getElementById('username').value;
+
+        
+
+        if (!hash || !user) {
+
+            showError("Missing required parameters.");
+
+            return;
+
+        }
+
+
+
+        btn.disabled = true;
+
+        btn.innerText = "AUTHENTICATING...";
+
+
+
+        const payload = {
+
+            hashKey: hash,
+
+            username: user,
+
+            
+
+            serverName: document.getElementById('sname').value || "Cosmo Node",
+
+            ram: document.getElementById('ram').value,
+
+            disk: document.getElementById('disk').value
+
+        };
+
+
+
+
+
+        try {
+
+            const res = await fetch(`${API}/deploy`, {
+
+                method: 'POST',
+
+                headers: {'Content-Type': 'application/json'},
+
+                body: JSON.stringify(payload)
+
+            });
+
+            const data = await res.json();
+
+
+
+            if (data.success) {
+
+                const r = document.getElementById('result');
+
+                r.style.display = 'block';
+
+                r.innerHTML = `
+
+                    <div style="font-size: 16px; font-weight: 800; margin-bottom: 16px; color: #4ade80;">✅ Deployment Live</div>
+
+                    <div class="data-label">User:</div>
+
+                    <div class="data-value">${data.username}</div>
+
+                    <div class="data-label">Password:</div>
+
+                    <div class="data-value">${data.password}</div>
+
+                    <a href="https://panel.panelhosting.qzz.io" class="panel-link" target="_blank">Open Console</a>
+
+                `;
+
+                btn.innerText = "LINK ESTABLISHED";
+
+            } else {
+
+                showError(data.error || "Execution failed.");
+
+                btn.disabled = false;
+
+                btn.innerText = "RETRY DEPLOYMENT";
+
+            }
+
+        } catch (err) {
+
+            showError("Link to Ground Control failed.");
+
+            btn.disabled = false;
+
+            btn.innerText = "RETRY DEPLOYMENT";
+
+        }
+
+    }
+
+
+
+    function showError(msg) {
+
+        const r = document.getElementById('result');
+
+        r.style.display = 'block';
+
+        r.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+
+        r.style.background = 'rgba(239, 68, 68, 0.05)';
+
+        r.innerHTML = `<span style="color: #f87171; font-weight: 700; font-size: 13px;">⚠️ ${msg}</span>`;
+
+    }
+
+
+
+</script>
+
+</body>
+
+</html>.inner-face {
   position: absolute;
   width: 100%;
   height: 100%;
