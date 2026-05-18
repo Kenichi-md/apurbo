@@ -1,381 +1,253 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>apurbo Games - baler car game</title>
+    <title>Amit Roy | Portfolio & Student Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate900: '#0f172a',
+                        slate800: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* মূল থিম ও ডিজাইন */
-        :root {
-            --bg-color: #f0f2f5;
-            --text-color: #333;
-            --panel-bg: #ffffff;
-            --road-bg: #333333;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #f0f2f5;
-            --panel-bg: #2d2d2d;
-            --road-bg: #111111;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            user-select: none;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-            display: block;
-            text-align: center;
-            padding: 20px;
-        }
-
-        header {
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #e74c3c;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            margin-bottom: 5px;
-        }
-
-        /* কন্ট্রোল প্যানেল */
-        .controls-panel {
-            background-color: var(--panel-bg);
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        button {
-            padding: 8px 15px;
-            margin: 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            background-color: #3498db;
-            color: white;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        .score-board {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
-        /* গেম এরিয়া (রাস্তা) */
-        #gameArea {
-            width: 320px;
-            height: 480px;
-            background-color: var(--road-bg);
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            border: 4px solid #fff;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        /* রাস্তার সাদা ড্যাশ লাইন */
-        .road-line {
-            width: 8px;
-            height: 40px;
-            background-color: #fff;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* প্লেয়ার ও শত্রু গাড়ি */
-        .car {
-            width: 40px;
-            height: 70px;
-            position: absolute;
-            border-radius: 5px;
-        }
-
-        #playerCar {
-            background-color: #e74c3c; /* লাল রঙের খেলোয়াড়ের গাড়ি */
-            bottom: 20px;
-            left: 140px;
-            transition: left 0.05s linear;
-        }
-
-        /* গাড়ির চাকা ও জানালার ডিজাইন */
-        .car::before {
-            content: '';
-            position: absolute;
-            top: 10px; left: 5px; right: 5px; height: 12px;
-            background-color: #a6d8f0;
-            border-radius: 2px;
-        }
-
-        .enemy {
-            background-color: #f1c40f; /* হলুদ রঙের শত্রু গাড়ি */
-            top: -80px;
-        }
-
-        /* গেম ওভার স্ক্রিন */
-        #gameOverScreen {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            color: white;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        /* মোবাইল টাচ কন্ট্রোল বাটন */
-        .mobile-controls {
-            margin-top: 15px;
-        }
-
-        .touch-btn {
-            width: 70px;
-            height: 50px;
-            font-size: 20px;
-            background-color: #2ecc71;
-        }
-
-        .touch-btn:active {
-            background-color: #27ae60;
-        }
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate900 dark:text-slate-100 transition-colors duration-300">
 
-    <header>
-        <h1>apurbor babar  Games</h1>
-        <div class="score-board">স্কোর: <span id="score">0</span></div>
-    </header>
-
-    <div class="controls-panel">
-        <button id="themeToggle">ডার্ক মোড: অফ</button>
-        <button id="musicToggle">মিউজিক: অন</button>
-        <button id="startBtn" onclick="startGame()">গেম শুরু করুন</button>
-    </div>
-
-    <div id="gameArea">
-        <div id="gameOverScreen">
-            <h2 style="font-size: 28px; margin-bottom: 10px; color: #ff4757;">গেম ওভার!</h2>
-            <p style="font-size: 18px; margin-bottom: 20px;">আপনার মোট স্কোর: <span id="finalScore">0</span></p>
-            <button onclick="startGame()" style="background-color: #2ecc71;">আবার খেলুন</button>
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/75 dark:bg-slate900/75 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-bold text-xl bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+                    AMIT.DEV
+                </div>
+                <div class="hidden md:flex space-x-8 font-medium text-sm">
+                    <a href="#hero" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">About</a>
+                    <a href="#learnings" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">Learnings</a>
+                    <a href="#projects" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">Projects</a>
+                    <a href="#utility" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">Utility Hub</a>
+                    <a href="#contact" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">Contact</a>
+                </div>
+                <div class="flex items-center">
+                    <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:ring-2 hover:ring-indigo-400 transition-all">
+                        <i id="theme-toggle-dark-icon" class="hidden fa-solid fa-moon text-lg"></i>
+                        <i id="theme-toggle-light-icon" class="hidden fa-solid fa-sun text-lg"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div id="playerCar" class="car"></div>
-    </div>
+    </nav>
 
-    <div class="mobile-controls">
-        <button class="touch-btn" id="leftBtn">◀</button>
-        <button class="touch-btn" id="rightBtn">▶</button>
-    </div>
+    <section id="hero" class="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 relative overflow-hidden">
+        <div class="text-center z-10 max-w-3xl flex flex-col items-center">
+            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full p-1 bg-gradient-to-tr from-indigo-500 to-cyan-400 shadow-xl mb-8 group relative overflow-hidden">
+                <div class="w-full h-full rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+                    <i class="fa-solid fa-user-tie text-5xl text-slate-400 group-hover:scale-110 transition-transform"></i>
+                </div>
+            </div>
 
-    <script>
-        const gameArea = document.getElementById('gameArea');
-        const playerCar = document.getElementById('playerCar');
-        const scoreDisplay = document.getElementById('score');
-        const gameOverScreen = document.getElementById('gameOverScreen');
-        const finalScoreDisplay = document.getElementById('finalScore');
-        const themeToggle = document.getElementById('themeToggle');
-        const musicToggle = document.getElementById('musicToggle');
-
-        let isPlaying = false;
-        let score = 0;
-        let playerX = 140; // প্রারম্ভিক অবস্থান
-        let roadLines = [];
-        let enemies = [];
-        let animationFrameId;
-        
-        // ফিচারের জন্য ডিফল্ট সেটিংস
-        let isDarkMode = false;
-        let isMusicOn = true;
-
-        // অডিও কনটেক্সট (মিউজিক এর জন্য ব্রাউজার জেনারেটেড সাউন্ড)
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
-        function playSound(frequency, type, duration) {
-            if (!isMusicOn) return;
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            oscillator.type = type;
-            oscillator.frequency.value = frequency;
-            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            oscillator.start();
-            oscillator.stop(audioCtx.currentTime + duration);
-        }
-
-        // রাস্তার ব্যাকগ্রাউন্ড লাইন তৈরি
-        function createRoadLines() {
-            for (let i = 0; i < 5; i++) {
-                let line = document.createElement('div');
-                line.classList.add('road-line');
-                line.style.top = (i * 100) + 'px';
-                gameArea.appendChild(line);
-                roadLines.push(line);
-            }
-        }
-        createRoadLines();
-
-        // শত্রু গাড়ি তৈরি
-        function createEnemy() {
-            if (enemies.length < 2) {
-                let enemy = document.createElement('div');
-                enemy.classList.add('car', 'enemy');
-                enemy.style.left = Math.floor(Math.random() * 260) + 'px';
-                enemy.style.top = '-80px';
-                gameArea.appendChild(enemy);
-                enemies.push(enemy);
-            }
-        }
-
-        // গেম শুরু করার মূল ফাংশন
-        function startGame() {
-            // পূর্বের শত্রু গাড়ি ও স্ক্রিন পরিষ্কার করা
-            enemies.forEach(enemy => enemy.remove());
-            enemies = [];
-            gameOverScreen.style.display = 'none';
-            score = 0;
-            playerX = 140;
-            playerCar.style.left = playerX + 'px';
-            scoreDisplay.innerText = score;
-            isPlaying = true;
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 text-slate-900 dark:text-white">
+                Hi, I'm <span class="bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent">Amit Roy</span>
+            </h1>
             
-            // বিফ সাউন্ড গেম শুরুর সংকেত হিসেবে
-            playSound(440, 'square', 0.2);
+            <div class="h-8 mb-8 text-lg sm:text-2xl font-medium text-slate-600 dark:text-slate-400">
+                <span id="typing-text"></span><span class="animate-pulse text-indigo-500 font-bold">|</span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
+                <a href="#contact" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-indigo-500/20 transition-all transform hover:-translate-y-0.5 w-full sm:w-auto">
+                    Contact Me
+                </a>
+                <a href="#" class="px-6 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-medium rounded-xl transition-all transform hover:-translate-y-0.5 w-full sm:w-auto flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-download"></i> Download CV
+                </a>
+            </div>
+
+            <div class="flex justify-center space-x-6 mt-12 text-2xl text-slate-400 dark:text-slate-500">
+                <a href="#" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors transform hover:scale-110"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors transform hover:scale-110"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    </section>
+
+    <section id="about" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200 dark:border-slate-800">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <div>
+                <h2 class="text-3xl font-bold mb-6">About Me</h2>
+                <div class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p>
+                        I am a passionate Frontend Developer and tech enthusiast driven by creating sharp, high-performance web experiences. Currently, I am expanding my knowledge as a 2nd-year student in the 4th semester at <strong>Surya Sen Mahavidyalaya, Siliguri</strong>.
+                    </p>
+                    <p>
+                        Alongside my academic pursuits, I actively balance my routine as a <strong>Private Tutor</strong>, helping young learners excel while strengthening my own logical and foundational skills daily.
+                    </p>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-6">Technical Skills</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="p-5 bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center transition-all hover:scale-105 hover:border-indigo-500 dark:hover:border-indigo-400 group">
+                        <i class="fa-brands fa-html5 text-4xl text-orange-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">HTML5</span>
+                    </div>
+                    <div class="p-5 bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center transition-all hover:scale-105 hover:border-indigo-500 dark:hover:border-indigo-400 group">
+                        <i class="fa-brands fa-css3-alt text-4xl text-blue-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">CSS3</span>
+                    </div>
+                    <div class="p-5 bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center transition-all hover:scale-105 hover:border-indigo-500 dark:hover:border-indigo-400 group">
+                        <i class="fa-brands fa-js text-4xl text-yellow-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">JavaScript</span>
+                    </div>
+                    <div class="p-5 bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center transition-all hover:scale-105 hover:border-indigo-500 dark:hover:border-indigo-400 group">
+                        <i class="fa-regular fa-file-excel text-4xl text-green-600 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">MS Excel</span>
+                    </div>
+                    <div class="p-5 bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl flex flex-col items-center justify-center transition-all hover:scale-105 hover:border-indigo-500 dark:hover:border-indigo-400 group">
+                        <i class="fa-solid fa-calculator text-4xl text-cyan-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">TallyPrime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="learnings" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200 dark:border-slate-800">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold mb-4">Internship Learnings</h2>
+            <p class="text-slate-600 dark:text-slate-400">Core pillars and paradigms mastered throughout the GenAI Web Development Internship workflow.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/40 rounded-xl flex items-center justify-center mb-4 text-indigo-600 dark:text-indigo-400 font-bold">01</div>
+                <h3 class="text-lg font-semibold mb-2">Vibe Coding Workflow</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Learned how to fluidly pair with Generative AI tools to conceptualize, iterate, and modularize modern applications asynchronously at a accelerated pace.</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                <div class="w-10 h-10 bg-cyan-100 dark:bg-cyan-900/40 rounded-xl flex items-center justify-center mb-4 text-cyan-600 dark:text-cyan-400 font-bold">02</div>
+                <h3 class="text-lg font-semibold mb-2">Prompt Engineering</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Mastered code-focused constraints, syntax guiding, debugging parameters, and architectural role-play logic inside advanced LLMs to fetch error-free components.</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+                <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/40 rounded-xl flex items-center justify-center mb-4 text-emerald-600 dark:text-emerald-400 font-bold">03</div>
+                <h3 class="text-lg font-semibold mb-2">CRUD Design & Deployment</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Acquired real-world experience implementing client-side persistence with JavaScript web APIs, error boundaries, structure validation, and secure distribution setups.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200 dark:border-slate-800">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold mb-4">My Projects</h2>
+            <p class="text-slate-600 dark:text-slate-400">An explicit demonstration of engineering design and functionality required by the assessment guidelines.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 lg:p-8">
+            <div class="lg:col-span-5 bg-slate-100 dark:bg-slate-800/80 rounded-2xl flex items-center justify-center min-h-[250px] border border-slate-200 dark:border-slate-700 relative overflow-hidden group">
+                <div class="text-center p-6 transition-transform group-hover:scale-105">
+                    <i class="fa-solid fa-square-poll-horizontal text-5xl text-indigo-500 mb-3"></i>
+                    <p class="text-xs font-semibold text-slate-400 dark:text-slate-500">[ Application Screenshot Placeholder ]</p>
+                </div>
+                </div>
             
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = requestAnimationFrame(gameLoop);
-        }
+            <div class="lg:col-span-7 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-bold text-indigo-500 uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1 rounded-full">Project 1 — CRUD Application</span>
+                    <h3 class="text-2xl font-bold mt-3 mb-4 text-slate-900 dark:text-white">Dynamic Task & Ledger System</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                        An intuitive data management portal engineered completely in client-side architecture. The application enforces robust validation routines across all basic operations: Create entry points, dynamic array reading pipelines, active modifications updates, and secure state deletion loops. Features state protection using direct Browser LocalStorage structures.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-medium rounded-md">HTML5 Semantic</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-medium rounded-md">Tailwind CSS</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-medium rounded-md">Vanilla ES6</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-medium rounded-md">Web Storage API</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-6 border-t border-slate-100 dark:border-slate-800 pt-4">
+                    <a href="https://github.com" target="_blank" class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition-colors">
+                        <i class="fa-brands fa-github text-lg"></i> GitHub Repository <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
+                    </a>
+                    <a href="https://netlify.com" target="_blank" class="flex items-center gap-2 text-sm font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 transition-colors">
+                        <i class="fa-solid fa-bolt text-lg"></i> Live Deployed Demo <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // গেমের লুপ (ক্রমাগত অ্যানিমেশন)
-        function gameLoop() {
-            if (!isPlaying) return;
+    <section id="utility" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200 dark:border-slate-800">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold mb-4">Smart Student Utility Hub</h2>
+            <p class="text-slate-600 dark:text-slate-400">An interactive module crafted to assist students and visitors with instantaneous micro-logging during deep focus hours.</p>
+        </div>
 
-            // রাস্তার লাইন চালানো (চলন্ত রাস্তার অনুভূতি)
-            roadLines.forEach(line => {
-                let top = parseInt(line.style.top);
-                top += 5;
-                if (top >= 480) top = -40;
-                line.style.top = top + 'px';
-            });
+        <div class="max-w-xl mx-auto bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-md">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold">Quick Study Notes Hub</h3>
+                    <p class="text-xs text-slate-400">Drop concepts or targets instantly into live local memory.</p>
+                </div>
+            </div>
 
-            // শত্রু গাড়ি চালানো ও তৈরি করা
-            if (Math.random() < 0.02) createEnemy();
+            <div class="flex gap-2 mb-6">
+                <input id="note-input" type="text" class="flex-1 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all text-sm placeholder:text-slate-400" placeholder="Type a key note or study target...">
+                <button id="add-note-btn" class="px-5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-xl transition-colors whitespace-nowrap shadow-md shadow-indigo-500/10">
+                    Add Note
+                </button>
+            </div>
 
-            enemies.forEach((enemy, index) => {
-                let top = parseInt(enemy.style.top);
-                top += 6; // শত্রু গাড়ির গতিবেগ
-                enemy.style.top = top + 'px';
+            <ul id="notes-container" class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                <li id="empty-state-text" class="text-center py-6 text-sm text-slate-400 dark:text-slate-500 border border-dashed border-slate-200 dark:border-slate-800 rounded-xl">
+                    No active study logs recorded. Input above to register.
+                </li>
+            </ul>
+        </div>
+    </section>
 
-                // স্ক্রিন পার হয়ে গেলে স্কোর বৃদ্ধি ও পুনরায় উপরে পাঠানো
-                if (top > 480) {
-                    score += 10;
-                    scoreDisplay.innerText = score;
-                    playSound(600, 'sine', 0.05); // পয়েন্ট পাওয়ার সাউন্ড
-                    enemy.remove();
-                    enemies.splice(index, 1);
-                }
+    <section id="contact" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200 dark:border-slate-800 relative">
+        
+        <div id="toast-notification" class="hidden fixed bottom-6 right-6 z-50 p-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl shadow-2xl flex items-center gap-4 border border-slate-800 dark:border-slate-200 animate-bounce">
+            <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-sm">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <p class="text-sm font-bold">Message Received!</p>
+                <p class="text-xs opacity-80">Amit will reply shortly.</p>
+            </div>
+        </div>
 
-                // সংঘর্ষ (Collision) চেক করা
-                if (isColliding(playerCar, enemy)) {
-                    endGame();
-                }
-            });
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold mb-4">Contact Me</h2>
+            <p class="text-slate-600 dark:text-slate-400">Fill out the validated structure below to route communications or project inquiries directly.</p>
+        </div>
 
-            animationFrameId = requestAnimationFrame(gameLoop);
-        }
-
-        // সংঘর্ষ নির্ণয় পদ্ধতি
-        function isColliding(a, b) {
-            let aRect = a.getBoundingClientRect();
-            let bRect = b.getBoundingClientRect();
-
-            return !(
-                aRect.bottom < bRect.top ||
-                aRect.top > bRect.bottom ||
-                aRect.right < bRect.left ||
-                aRect.left > bRect.right
-            );
-        }
-
-        // গেম সমাপ্তি
-        function endGame() {
-            isPlaying = false;
-            cancelAnimationFrame(animationFrameId);
-            playSound(150, 'sawtooth', 0.5); // গেম ওভারের বাজনা
-            finalScoreDisplay.innerText = score;
-            gameOverScreen.style.display = 'flex';
-        }
-
-        // কিবোর্ড কন্ট্রোল (কম্পিউটার ব্যবহারকারীদের জন্য)
-        window.addEventListener('keydown', (e) => {
-            if (!isPlaying) return;
-            if (e.key === 'ArrowLeft' && playerX > 10) {
-                playerX -= 25;
-            }
-            if (e.key === 'ArrowRight' && playerX < 270) {
-                playerX += 25;
-            }
-            playerCar.style.left = playerX + 'px';
-        });
-
-        // অন-স্ক্রিন বাটন কন্ট্রোল (মোবাইল ব্যবহারকারীদের জন্য)
-        document.getElementById('leftBtn').addEventListener('click', () => {
-            if (isPlaying && playerX > 10) {
-                playerX -= 25;
-                playerCar.style.left = playerX + 'px';
-            }
-        });
-
-        document.getElementById('rightBtn').addEventListener('click', () => {
-            if (isPlaying && playerX < 270) {
-                playerX += 25;
-                playerCar.style.left = playerX + 'px';
-            }
-        });
-
-        // ডার্ক মোড অন/অফ লজিক
-        themeToggle.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            if (isDarkMode) {
-                document.body.setAttribute('data-theme', 'dark');
-                themeToggle.innerText = 'ডার্ক মোড: অন';
-            } else {
-                document.body.removeAttribute('data-theme');
-                themeToggle.innerText = 'ডার্ক মোড: অফ';
-            }
-        });
-
-        // মিউজিক অন/অফ লজিক
-        musicToggle.addEventListener('click', () => {
-            isMusicOn = !isMusicOn;
-            if (isMusicOn) {
-                musicToggle.innerText = 'মিউজিক: অন';
-            } else {
-                musicToggle.innerText = 'মিউজিক: অফ';
-            }
-        });
-    </script>
-</body>
-</html>
+        <form id="contact-form" class="space-y-6 bg-white dark:bg-slate-800/40 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider mb-2 text-slate-500">Your Name *</label>
+                    <input type="text" id="input-name" required class="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider mb-2 text-slate-500">Email Address *</label>
+                    <input type="email" id="input-email" required class="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all text-sm">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider mb-2 text-slate-500">Me
