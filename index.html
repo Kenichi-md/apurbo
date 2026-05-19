@@ -1,177 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Music Downloader</title>
+  <title>anar baler web</title>
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:sans-serif;
-}
+  <style>
+    body{
+      background:black;
+      color:white;
+      text-align:center;
+      font-family:sans-serif;
+    }
 
-body{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
-}
+    h1{
+      color:cyan;
+    }
 
-.container{
-  width:90%;
-  max-width:420px;
-  padding:25px;
-  border-radius:25px;
-  backdrop-filter:blur(15px);
-  background:rgba(0,0,0,0.55);
-  box-shadow:0 0 25px rgba(0,0,0,0.5);
-  color:#fff;
-}
+    button{
+      padding:10px 20px;
+      border:none;
+      border-radius:10px;
+      background:cyan;
+      font-size:18px;
+    }
+  </style>
 
-h1{
-  text-align:center;
-  margin-bottom:20px;
-  font-size:32px;
-}
-
-input{
-  width:100%;
-  padding:15px;
-  border:none;
-  outline:none;
-  border-radius:15px;
-  margin-bottom:15px;
-  font-size:16px;
-}
-
-button{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:15px;
-  background:#00ff99;
-  color:#000;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-button:hover{
-  transform:scale(1.03);
-}
-
-.card{
-  margin-top:20px;
-  padding:15px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.08);
-  display:none;
-}
-
-.song-img{
-  width:100%;
-  height:220px;
-  border-radius:20px;
-  object-fit:cover;
-}
-
-.song-name{
-  margin-top:12px;
-  font-size:22px;
-  font-weight:bold;
-}
-
-.artist{
-  opacity:0.8;
-  margin-top:5px;
-}
-
-.download-btn{
-  margin-top:15px;
-  background:#ffcc00;
-}
-
-audio{
-  width:100%;
-  margin-top:15px;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container">
+  <h1>sala amit 😎</h1>
 
-<h1>🎵 Music Downloader</h1>
+  <p>Amit bokachoda yeeeh</p>
 
-<input type="text" id="songInput" placeholder="Enter song name">
-
-<button onclick="searchSong()">Search Song</button>
-
-<div class="card" id="musicCard">
-
-<img src="" class="song-img" id="songImg">
-
-<div class="song-name" id="songName"></div>
-
-<div class="artist" id="artistName"></div>
-
-<a id="downloadLink" download>
-<button class="download-btn">⬇ Download Music</button>
-</a>
-
-<audio controls id="audioPlayer">
-<source id="audioSource">
-</audio>
-
-</div>
-
-</div>
-
-<script>
-
-function searchSong(){
-
-let song = document.getElementById("songInput").value;
-
-if(song == ""){
-alert("Enter Song Name");
-return;
-}
-
-fetch(`https://itunes.apple.com/search?term=${song}&limit=1`)
-.then(res => res.json())
-.then(data => {
-
-let music = data.results[0];
-
-document.getElementById("musicCard").style.display = "block";
-
-document.getElementById("songImg").src = music.artworkUrl100.replace("100x100","600x600");
-
-document.getElementById("songName").innerText = music.trackName;
-
-document.getElementById("artistName").innerText = music.artistName;
-
-document.getElementById("audioSource").src = music.previewUrl;
-
-document.getElementById("audioPlayer").load();
-
-document.getElementById("downloadLink").href = music.previewUrl;
-
-})
-.catch(err=>{
-alert("Song Not Found");
-});
-
-}
-
-</script>
+  <button>Follow Me</button>
 
 </body>
 </html>
