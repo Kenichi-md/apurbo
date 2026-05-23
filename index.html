@@ -1,38 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>anar baler web</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apurbo Insta Reel Downloader</title>
   <style>
-    body{
-      background:red;
-      color:black;
-      text-align:center;
-      font-family:sans-serif;
+    body {
+      font-family: 'Godofwar', sans-serif;
+      background: #0d0d0d;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #fff;
     }
 
-    h1{
-      color:cyan;
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #ffcc00;
+      text-align: center;
+      max-width: 90%;
     }
 
-    button{
-      padding:10px 20px;
-      border:none;
-      border-radius:10px;
-      background:cyan;
-      font-size:24px;
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #ffcc00;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ffcc00, #ff9900);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #ffaa00;
+    }
+
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #00ff99, #00cc66);
+      color: #000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .whatsapp-button:hover {
+      background: #00ff99;
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    video, img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
     }
   </style>
-
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
-
 <body>
+  <div class="container">
+<img src="https://files.catbox.moe/me3m0h.jpeg" alt="kenichi-md Logo" style="width: 120px; border-radius: 50%; margin-bottom: 20px;" />
+    <h1>🎀 Apurbo  
+      Insta Reel Downloader</h1>
+    <input type="text" id="urlInput" placeholder="Paste Instagram Reel URL here...">
+    <button onclick="fetchInstagramReel()">Download</button>
+    <div id="result" class="result"></div>
+    <a href="https://wa.me/918967360566?text=⏤꯭֯ 🍷 𝐀𝐏𝐔𝐑𝐁𝐎-𝚾ᴅ ᥫ᭡⏤꯭֯_" class="whatsapp-button">🔥 KENICHI WhatsApp Support</a>
+    <div class="footer">CREATE BY ✅ KENICHI-XD</div>
+  </div>
 
-  <h1>sala amit 😎</h1>
-
-  <p>Amit bokachoda yeeeh</p>
-
-  <button>Follow Me</button>
-
+  <script>
+    function fetchInstagramReel() {
+      const url = document.getElementById('urlInput').value;
+      const resultContainer = document.getElementById('result');
+      resultContainer.innerHTML = '';
+      if (!url) {
+        alert("Please enter a valid URL");
+        return;
+      }
+      resultContainer.innerHTML = '<p>APURBO ⏳ Fetching...</p>';
+      const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          resultContainer.innerHTML = '';
+          if (!data.error) {
+            const mediaUrl = data.result.url;
+            const extension = data.result.extension;
+            if (extension === 'mp4') {
+              const videoElement = document.createElement('video');
+              videoElement.src = mediaUrl;
+              videoElement.controls = true;
+              resultContainer.appendChild(videoElement);
+            } else {
+              const imgElement = document.createElement('img');
+              imgElement.src = mediaUrl;
+              resultContainer.appendChild(imgElement);
+            }
+          } else {
+            alert("Error: " + data.error);
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching the Instagram reel:", error);
+          alert("There was an error fetching the reel.");
+          resultContainer.innerHTML = '';
+        });
+    }
+  </script>
 </body>
 </html>
