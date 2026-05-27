@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LEVANTER-X QR & Pair Code</title><style>
+<title>APURBO-XD QR & Pair Code</title><style>
 *{
 margin:0;
 padding:0;
@@ -173,18 +173,18 @@ letter-spacing:4px;
 }
 </style></head>
 <body><div class="container"><div class="header">
-<h1>LEVANTER-X</h1>
+<h1>APURBO-XD</h1>
 <p>WhatsApp Pair Code & QR Generator</p>
 </div><div class="grid"><div class="card">
 <h2>Pair Code Login</h2><input type="text" id="number" placeholder="Enter WhatsApp Number" /><button onclick="generateCode()">Generate Pair Code</button>
 
 <div class="code-box">
 <p>Generated Pair Code</p>
-<div class="code" id="pairCode">XXXX-XX</div>
+<div class="code" id="pairCode">XXXXXXXX</div>
 </div>
 </div><div class="card">
 <h2>QR Login</h2><div class="qr-box">
-<img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=LEVANTER-X" />
+<img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=APURBO-XD" />
 </div><button style="margin-top:20px;" onclick="refreshQR()">Refresh QR</button>
 
 </div></div><div class="features">
@@ -199,7 +199,7 @@ letter-spacing:4px;
 <p>Levanter inspired stylish dark UI system.</p>
 </div>
 </div><div class="footer">
-Powered By LEVANTER-X
+Powered By APURBO-XD
 </div></div><script>
 function generateCode(){
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -211,7 +211,7 @@ code += chars[Math.floor(Math.random()*chars.length)];
 
 code += '-';
 
-for(let i=0;i<2;i++){
+for(let i=0;i<4;i++){
 code += chars[Math.floor(Math.random()*chars.length)];
 }
 
@@ -223,4 +223,4 @@ const random = Math.random().toString(36).substring(2);
 document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${random}`;
 }
 </script></body>
-  </html>
+</html>
