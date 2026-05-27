@@ -1,149 +1,226 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apurbo Insta Reel Downloader</title>
-  <style>
-    body {
-      font-family: 'Godofwar', sans-serif;
-      background: #0d0d0d;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #fff;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LEVANTER-X QR & Pair Code</title><style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
 
-    .container {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px #ffcc00;
-      text-align: center;
-      max-width: 90%;
-    }
+body{
+background:#050505;
+color:white;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
 
-    h1 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      color: #ffcc00;
-    }
+.container{
+width:100%;
+max-width:1200px;
+background:#111;
+border:1px solid #222;
+border-radius:30px;
+padding:40px;
+box-shadow:0 0 50px rgba(255,255,255,0.05);
+}
 
-    input[type="text"] {
-      width: 90%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 2px solid #ffcc00;
-      border-radius: 8px;
-      background: transparent;
-      color: #fff;
-      font-size: 14px;
-      outline: none;
-    }
+.header{
+text-align:center;
+margin-bottom:50px;
+}
 
-    button {
-      padding: 12px 24px;
-      font-size: 15px;
-      font-weight: bold;
-      background: linear-gradient(45deg, #ffcc00, #ff9900);
-      border: none;
-      border-radius: 8px;
-      color: #000;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
+.header h1{
+font-size:55px;
+font-weight:bold;
+letter-spacing:3px;
+}
 
-    button:hover {
-      background: #ffaa00;
-    }
+.header p{
+color:#888;
+margin-top:10px;
+font-size:18px;
+}
 
-    .whatsapp-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #00ff99, #00cc66);
-      color: #000;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
 
-    .whatsapp-button:hover {
-      background: #00ff99;
-    }
+.card{
+background:#0b0b0b;
+border:1px solid #222;
+border-radius:25px;
+padding:30px;
+}
 
-    .result {
-      margin-top: 20px;
-    }
+.card h2{
+font-size:28px;
+margin-bottom:25px;
+}
 
-    video, img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
+input{
+width:100%;
+padding:18px;
+border:none;
+outline:none;
+background:#151515;
+color:white;
+border-radius:15px;
+font-size:16px;
+border:1px solid #333;
+margin-bottom:20px;
+}
 
-    .footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #888;
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-<img src="https://files.catbox.moe/me3m0h.jpeg" alt="kenichi-md Logo" style="width: 120px; border-radius: 50%; margin-bottom: 20px;" />
-    <h1>🎀 Apurbo  
-      Insta Reel Downloader</h1>
-    <input type="text" id="urlInput" placeholder="Paste Instagram Reel URL here...">
-    <button onclick="fetchInstagramReel()">Download</button>
-    <div id="result" class="result"></div>
-    <a href="https://wa.me/918967360566?text=⏤꯭֯ 🍷 𝐀𝐏𝐔𝐑𝐁𝐎-𝚾ᴅ ᥫ᭡⏤꯭֯_" class="whatsapp-button">🔥 KENICHI WhatsApp Support</a>
-    <div class="footer">CREATE BY ✅ KENICHI-XD</div>
-  </div>
+button{
+width:100%;
+padding:18px;
+border:none;
+border-radius:15px;
+background:white;
+color:black;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
 
-  <script>
-    function fetchInstagramReel() {
-      const url = document.getElementById('urlInput').value;
-      const resultContainer = document.getElementById('result');
-      resultContainer.innerHTML = '';
-      if (!url) {
-        alert("Please enter a valid URL");
-        return;
-      }
-      resultContainer.innerHTML = '<p>APURBO ⏳ Fetching...</p>';
-      const apiUrl = `https://insta-dl.hazex.workers.dev/?url=${encodeURIComponent(url)}`;
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          resultContainer.innerHTML = '';
-          if (!data.error) {
-            const mediaUrl = data.result.url;
-            const extension = data.result.extension;
-            if (extension === 'mp4') {
-              const videoElement = document.createElement('video');
-              videoElement.src = mediaUrl;
-              videoElement.controls = true;
-              resultContainer.appendChild(videoElement);
-            } else {
-              const imgElement = document.createElement('img');
-              imgElement.src = mediaUrl;
-              resultContainer.appendChild(imgElement);
-            }
-          } else {
-            alert("Error: " + data.error);
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching the Instagram reel:", error);
-          alert("There was an error fetching the reel.");
-          resultContainer.innerHTML = '';
-        });
-    }
-  </script>
-</body>
-</html>
+button:hover{
+transform:scale(1.03);
+}
+
+.code-box{
+margin-top:25px;
+background:#151515;
+border:1px solid #333;
+padding:30px;
+border-radius:20px;
+text-align:center;
+}
+
+.code-box p{
+color:#888;
+margin-bottom:15px;
+}
+
+.code{
+font-size:40px;
+font-weight:bold;
+letter-spacing:8px;
+}
+
+.qr-box{
+background:white;
+padding:20px;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+height:320px;
+}
+
+.qr-box img{
+width:250px;
+height:250px;
+}
+
+.features{
+margin-top:50px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.feature{
+background:#0b0b0b;
+border:1px solid #222;
+padding:25px;
+border-radius:20px;
+}
+
+.feature h3{
+margin-bottom:10px;
+font-size:22px;
+}
+
+.feature p{
+color:#888;
+line-height:1.6;
+}
+
+.footer{
+text-align:center;
+margin-top:40px;
+color:#666;
+font-size:14px;
+}
+
+@media(max-width:700px){
+.header h1{
+font-size:40px;
+}
+
+.code{
+font-size:28px;
+letter-spacing:4px;
+}
+}
+</style></head>
+<body><div class="container"><div class="header">
+<h1>LEVANTER-X</h1>
+<p>WhatsApp Pair Code & QR Generator</p>
+</div><div class="grid"><div class="card">
+<h2>Pair Code Login</h2><input type="text" id="number" placeholder="Enter WhatsApp Number" /><button onclick="generateCode()">Generate Pair Code</button>
+
+<div class="code-box">
+<p>Generated Pair Code</p>
+<div class="code" id="pairCode">XXXX-XX</div>
+</div>
+</div><div class="card">
+<h2>QR Login</h2><div class="qr-box">
+<img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=LEVANTER-X" />
+</div><button style="margin-top:20px;" onclick="refreshQR()">Refresh QR</button>
+
+</div></div><div class="features">
+<div class="feature">
+<h3>Fast Connection</h3>
+<p>Instant WhatsApp multi device connection system.</p>
+</div><div class="feature">
+<h3>Secure Session</h3>
+<p>Encrypted session support with modern protection.</p>
+</div><div class="feature">
+<h3>Modern Dashboard</h3>
+<p>Levanter inspired stylish dark UI system.</p>
+</div>
+</div><div class="footer">
+Powered By LEVANTER-X
+</div></div><script>
+function generateCode(){
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+let code = '';
+
+for(let i=0;i<4;i++){
+code += chars[Math.floor(Math.random()*chars.length)];
+}
+
+code += '-';
+
+for(let i=0;i<2;i++){
+code += chars[Math.floor(Math.random()*chars.length)];
+}
+
+document.getElementById('pairCode').innerText = code;
+}
+
+function refreshQR(){
+const random = Math.random().toString(36).substring(2);
+document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${random}`;
+}
+</script></body>
+  </html>
