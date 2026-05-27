@@ -202,25 +202,27 @@ letter-spacing:4px;
 Powered By APURBO-XD
 </div></div><script>
 function generateCode(){
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-let code = '';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let code = '';
 
-for(let i=0;i<4;i++){
-code += chars[Math.floor(Math.random()*chars.length)];
-}
+  for(let i = 0; i < 4; i++){
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
 
-code += '-';
+  code += '-';
 
-for(let i=0;i<4;i++){
-code += chars[Math.floor(Math.random()*chars.length)];
-}
+  for(let i = 0; i < 4; i++){
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
 
-document.getElementById('pairCode').innerText = code;
+  document.getElementById('pairCode').innerText = code;
 }
 
 function refreshQR(){
-const random = Math.random().toString(36).substring(2);
-document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${random}`;
+  const random = Math.random().toString(36).substring(2, 12);
+  const qr = document.getElementById('qrImage');
+
+  qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + random;
 }
 </script></body>
-</html>
+  </html>
