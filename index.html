@@ -3,89 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APURBO-DAS Full DP Maker</title>
+<title>APURBO-DAS DP Maker</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#0d0d0d;
-color:white;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-min-height:100vh;
 padding:20px;
+overflow:hidden;
+background:#000;
+}
+
+.bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+filter:blur(18px);
+transform:scale(1.1);
+z-index:-2;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.5);
+z-index:-1;
 }
 
 .container{
 width:100%;
 max-width:450px;
-background:#151515;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:25px;
 padding:20px;
-border-radius:20px;
-box-shadow:0 0 20px #00ffcc30;
+box-shadow:0 0 25px rgba(0,255,255,.2);
 }
 
 .logo{
 text-align:center;
-font-size:28px;
-font-weight:bold;
+font-size:30px;
+font-weight:700;
+color:#00ffff;
 margin-bottom:20px;
-color:#00ffcc;
 }
 
-.upload-box{
-border:2px dashed #00ffcc;
-padding:20px;
-text-align:center;
-border-radius:15px;
-cursor:pointer;
-margin-bottom:15px;
-}
-
-.upload-box input{
-display:none;
-}
-
-input[type=text]{
+input{
 width:100%;
 padding:12px;
+margin-bottom:12px;
 border:none;
 outline:none;
-border-radius:10px;
-background:#222;
+border-radius:12px;
+background:rgba(255,255,255,.1);
 color:white;
-margin-bottom:15px;
+}
+
+input::placeholder{
+color:#ddd;
+}
+
+.upload{
+width:100%;
+padding:14px;
+text-align:center;
+background:rgba(255,255,255,.08);
+border:2px dashed #00ffff;
+border-radius:12px;
+cursor:pointer;
+margin-bottom:12px;
+color:white;
+}
+
+.upload input{
+display:none;
 }
 
 button{
 width:100%;
 padding:12px;
 border:none;
-border-radius:10px;
-background:#00ffcc;
-font-weight:bold;
+border-radius:12px;
+background:#00ffff;
+color:black;
+font-weight:700;
 cursor:pointer;
-margin-top:10px;
+margin-top:8px;
 }
 
 .preview{
-margin-top:20px;
-width:100%;
+margin-top:15px;
 height:350px;
-background:#222;
 border-radius:15px;
 overflow:hidden;
-position:relative;
+background:#111;
 display:flex;
 justify-content:center;
 align-items:center;
+color:#aaa;
 }
 
 .preview img{
@@ -98,38 +129,38 @@ object-fit:cover;
 text-align:center;
 margin-top:15px;
 font-size:13px;
-color:#aaa;
+color:#ddd;
 }
 </style>
 </head>
 <body>
 
+<div class="bg" id="bg"></div>
+<div class="overlay"></div>
+
 <div class="container">
 
-<div class="logo">
-APURBO-DAS
-</div>
+<div class="logo">APURBO-DAS</div>
 
-<label class="upload-box">
-📷 Upload Photo
+<input type="text" id="bgUrl" placeholder="https://i.imgur.com/maXzTgz.jpeg">
+
+<button onclick="setBackground()">
+Set Background
+</button>
+
+<br><br>
+
+<label class="upload">
+📷 Upload Image
 <input type="file" id="imageInput" accept="image/*">
 </label>
 
-<input
-type="text"
-placeholder="Enter WhatsApp Number"
-id="number">
-
-<button onclick="generateDP()">
-Generate Full DP
-</button>
-
 <div class="preview" id="preview">
-Preview Here
+Image Preview
 </div>
 
 <button onclick="downloadImage()">
-Download DP
+Download Image
 </button>
 
 <div class="footer">
@@ -140,15 +171,22 @@ Download DP
 
 <script>
 
-const imageInput =
-document.getElementById("imageInput");
+let uploadedImage = "";
 
-const preview =
-document.getElementById("preview");
+function setBackground(){
+const url=document.getElementById("bgUrl").value.trim();
 
-let currentImage="";
+if(!url){
+alert("Enter Image URL");
+return;
+}
 
-imageInput.addEventListener("change",function(){
+document.getElementById("bg").style.backgroundImage=
+`url('${url}')`;
+}
+
+document.getElementById("imageInput")
+.addEventListener("change",function(){
 
 const file=this.files[0];
 
@@ -158,10 +196,10 @@ const reader=new FileReader();
 
 reader.onload=function(e){
 
-currentImage=e.target.result;
+uploadedImage=e.target.result;
 
-preview.innerHTML=
-`<img src="${currentImage}">`;
+document.getElementById("preview").innerHTML=
+`<img src="${uploadedImage}">`;
 
 }
 
@@ -169,30 +207,16 @@ reader.readAsDataURL(file);
 
 });
 
-function generateDP(){
-
-const number=
-document.getElementById("number").value;
-
-if(!currentImage){
-alert("Upload Image First");
-return;
-}
-
-alert("DP Generated For: "+number);
-
-}
-
 function downloadImage(){
 
-if(!currentImage){
-alert("No Image Found");
+if(!uploadedImage){
+alert("Upload image first");
 return;
 }
 
 const a=document.createElement("a");
-a.href=currentImage;
-a.download="APURBO-DAS-DP.png";
+a.href=uploadedImage;
+a.download="APURBO-DAS.png";
 a.click();
 
 }
