@@ -1,533 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ApurboDas API - Premium Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APURBO-DAS | WhatsApp DP Downloader</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+}
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+/* Background Image */
+.bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url('https://i.imgur.com/maXzTgz.jpeg') center center/cover no-repeat;
+    filter:blur(12px);
+    transform:scale(1.1);
+    z-index:-2;
+}
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+.bg::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+}
 
-    body{
-      font-family:'Plus Jakarta Sans',sans-serif;
-      background:#030712;
-      overflow-x:hidden;
-      color:white;
-    }
+/* Main Box */
+.container{
+    width:90%;
+    max-width:450px;
+    background:rgba(22,27,34,0.85);
+    backdrop-filter:blur(10px);
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 0 25px rgba(0,255,170,.4);
+}
 
-    .mono{
-      font-family:'JetBrains Mono',monospace;
-    }
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    color:#00ffaa;
+    margin-bottom:10px;
+    text-shadow:0 0 15px #00ffaa;
+}
 
-    .bg-mesh{
-      background:
-      radial-gradient(circle at top right, rgba(255,0,80,.15), transparent 35%),
-      radial-gradient(circle at bottom left, rgba(79,70,229,.15), transparent 35%),
-      #030712;
-    }
+.desc{
+    color:#ddd;
+    margin-bottom:20px;
+    font-size:14px;
+}
 
-    .glass{
-      background:rgba(15,23,42,.45);
-      backdrop-filter:blur(18px);
-      border:1px solid rgba(255,255,255,.05);
-      box-shadow:0 10px 40px rgba(0,0,0,.4);
-    }
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    background:#0d1117;
+    color:white;
+    margin-bottom:15px;
+}
 
-    .card-hover{
-      transition:.35s ease;
-    }
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#00ffaa;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
 
-    .card-hover:hover{
-      transform:translateY(-4px);
-      border-color:rgba(244,63,94,.4);
-      box-shadow:0 0 25px rgba(244,63,94,.15);
-    }
+button:hover{
+    transform:scale(1.03);
+}
 
-    ::-webkit-scrollbar{
-      width:6px;
-    }
+.result{
+    margin-top:20px;
+    display:none;
+}
 
-    ::-webkit-scrollbar-thumb{
-      background:#334155;
-      border-radius:50px;
-    }
+.result img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #00ffaa;
+    box-shadow:0 0 20px #00ffaa;
+}
 
-    .pulse-dot{
-      animation:pulse 1.5s infinite;
-    }
+.download{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 20px;
+    background:#00ffaa;
+    color:black;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+}
 
-    @keyframes pulse{
-      0%{opacity:1;}
-      50%{opacity:.3;}
-      100%{opacity:1;}
-    }
-
-  </style>
+/* Footer */
+footer{
+    position:fixed;
+    bottom:12px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-size:14px;
+    text-shadow:0 0 10px black;
+}
+</style>
 </head>
 
-<body class="bg-mesh min-h-screen flex">
+<body>
 
-  <!-- SIDEBAR -->
-  <aside class="w-72 hidden lg:flex flex-col justify-between border-r border-slate-800 bg-black/30 backdrop-blur-xl">
+<div class="bg"></div>
 
-    <div>
+<div class="container">
 
-      <div class="p-8 border-b border-slate-800 flex items-center gap-4">
+    <div class="logo">APURBO-DAS</div>
 
-        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-indigo-600 flex items-center justify-center text-2xl shadow-xl">
-          <i class="fa-solid fa-code"></i>
-        </div>
-
-        <div>
-          <h1 class="font-black text-lg tracking-wider">
-            APURBODAS
-          </h1>
-
-          <span class="text-[10px] mono bg-rose-500/10 border border-rose-500/20 text-rose-400 px-2 py-1 rounded-md">
-            PREMIUM CORE
-          </span>
-        </div>
-
-      </div>
-
-      <!-- MENU -->
-
-      <div class="p-4 space-y-2 mt-6">
-
-        <a href="#" class="flex items-center gap-3 px-4 py-4 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
-          <i class="fa-solid fa-chart-line"></i>
-          Dashboard
-        </a>
-
-        <a href="#" class="flex items-center gap-3 px-4 py-4 rounded-xl text-slate-400 hover:bg-slate-900 transition">
-          <i class="fa-solid fa-server"></i>
-          API Nodes
-        </a>
-
-        <a href="#" class="flex items-center gap-3 px-4 py-4 rounded-xl text-slate-400 hover:bg-slate-900 transition">
-          <i class="fa-solid fa-terminal"></i>
-          API Docs
-        </a>
-
-        <a href="#" class="flex items-center gap-3 px-4 py-4 rounded-xl text-slate-400 hover:bg-slate-900 transition">
-          <i class="fa-solid fa-shield-halved"></i>
-          Security
-        </a>
-
-      </div>
-
+    <div class="desc">
+        WhatsApp Profile Picture Downloader
     </div>
 
-    <div class="p-6 border-t border-slate-800">
+    <input type="text" id="number" placeholder="Enter WhatsApp Number">
 
-      <div class="flex items-center gap-3">
+    <button onclick="getDP()">Download DP</button>
 
-        <div class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></div>
+    <div class="result" id="result">
+        <img id="dp" src="https://picsum.photos/300">
 
-        <p class="text-xs text-slate-400">
-          Cluster Status :
-          <span class="text-white font-semibold">
-            Online
-          </span>
-        </p>
+        <br>
 
-      </div>
-
+        <a class="download" id="downloadBtn" href="#" download>
+            Download Image
+        </a>
     </div>
 
-  </aside>
-
-  <!-- MAIN -->
-
-  <main class="flex-1">
-
-    <!-- TOPBAR -->
-
-    <header class="h-24 border-b border-slate-800 bg-black/20 backdrop-blur-xl flex items-center justify-between px-6 md:px-12">
-
-      <div>
-
-        <h2 class="text-2xl font-black">
-          ApurboDas API Monitor
-        </h2>
-
-        <p class="text-sm text-slate-400 mt-1">
-          Real-time packet monitoring & live request analytics.
-        </p>
-
-      </div>
-
-      <button class="px-5 py-3 rounded-xl bg-gradient-to-r from-rose-500 to-indigo-600 font-bold text-sm shadow-lg">
-        API PANEL
-      </button>
-
-    </header>
-
-    <!-- CONTENT -->
-
-    <section class="p-6 md:p-10 space-y-10">
-
-      <!-- STATS -->
-
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-
-        <div class="glass rounded-2xl p-6 card-hover">
-          <div class="flex justify-between text-slate-400">
-            <span class="text-xs uppercase tracking-widest">
-              Total Requests
-            </span>
-
-            <i class="fa-solid fa-chart-simple text-rose-400"></i>
-          </div>
-
-          <h1 class="text-4xl font-black mt-5 mono">
-            145K
-          </h1>
-
-          <p class="text-emerald-400 text-xs mt-2">
-            +12% Increase
-          </p>
-        </div>
-
-        <div class="glass rounded-2xl p-6 card-hover">
-          <div class="flex justify-between text-slate-400">
-            <span class="text-xs uppercase tracking-widest">
-              Live RPM
-            </span>
-
-            <i class="fa-solid fa-bolt text-yellow-400"></i>
-          </div>
-
-          <h1 class="text-4xl font-black mt-5 mono">
-            198
-          </h1>
-
-          <p class="text-rose-400 text-xs mt-2">
-            High Traffic
-          </p>
-        </div>
-
-        <div class="glass rounded-2xl p-6 card-hover">
-          <div class="flex justify-between text-slate-400">
-            <span class="text-xs uppercase tracking-widest">
-              Memory Usage
-            </span>
-
-            <i class="fa-solid fa-microchip text-indigo-400"></i>
-          </div>
-
-          <h1 class="text-4xl font-black mt-5 mono">
-            256MB
-          </h1>
-
-          <div class="w-full h-2 rounded-full bg-slate-800 mt-4 overflow-hidden">
-            <div class="h-full w-[65%] bg-gradient-to-r from-rose-500 to-indigo-500"></div>
-          </div>
-        </div>
-
-        <div class="glass rounded-2xl p-6 card-hover">
-          <div class="flex justify-between text-slate-400">
-            <span class="text-xs uppercase tracking-widest">
-              Success Rate
-            </span>
-
-            <i class="fa-solid fa-circle-check text-emerald-400"></i>
-          </div>
-
-          <h1 class="text-4xl font-black mt-5 mono text-emerald-400">
-            99.9%
-          </h1>
-
-          <p class="text-xs text-slate-500 mt-2">
-            No server failures
-          </p>
-        </div>
-
-      </div>
-
-      <!-- API CARDS -->
-
-      <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-
-        <!-- LEFT -->
-
-        <div class="xl:col-span-2 glass rounded-2xl p-8">
-
-          <div class="flex items-center justify-between mb-8">
-
-            <div>
-              <h3 class="text-xl font-bold">
-                API Gateway Control
-              </h3>
-
-              <p class="text-sm text-slate-400 mt-1">
-                Enable or disable endpoints instantly.
-              </p>
-            </div>
-
-            <span class="text-[10px] uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full mono">
-              Live Control
-            </span>
-
-          </div>
-
-          <div class="space-y-4">
-
-            <!-- ITEM -->
-
-            <div class="bg-slate-950/50 border border-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-900 transition">
-
-              <div class="flex items-center gap-4">
-
-                <span class="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 mono text-[10px]">
-                  GET
-                </span>
-
-                <div>
-                  <h4 class="font-semibold mono">
-                    /api/ytdownloader
-                  </h4>
-
-                  <p class="text-xs text-slate-500 mt-1">
-                    YouTube media extraction endpoint.
-                  </p>
-                </div>
-
-              </div>
-
-              <input type="checkbox" checked class="w-5 h-5 accent-rose-500">
-
-            </div>
-
-            <!-- ITEM -->
-
-            <div class="bg-slate-950/50 border border-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-900 transition">
-
-              <div class="flex items-center gap-4">
-
-                <span class="px-3 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 mono text-[10px]">
-                  POST
-                </span>
-
-                <div>
-                  <h4 class="font-semibold mono">
-                    /api/whatsapp-bot
-                  </h4>
-
-                  <p class="text-xs text-slate-500 mt-1">
-                    Webhook automation engine.
-                  </p>
-                </div>
-
-              </div>
-
-              <input type="checkbox" checked class="w-5 h-5 accent-rose-500">
-
-            </div>
-
-            <!-- ITEM -->
-
-            <div class="bg-slate-950/50 border border-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-900 transition">
-
-              <div class="flex items-center gap-4">
-
-                <span class="px-3 py-1 rounded-lg bg-purple-500/10 text-purple-400 mono text-[10px]">
-                  GET
-                </span>
-
-                <div>
-                  <h4 class="font-semibold mono">
-                    /api/smm-panel
-                  </h4>
-
-                  <p class="text-xs text-slate-500 mt-1">
-                    Social media order synchronization.
-                  </p>
-                </div>
-
-              </div>
-
-              <input type="checkbox" class="w-5 h-5 accent-rose-500">
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- RIGHT -->
-
-        <div class="rounded-2xl overflow-hidden relative border border-rose-500/20 bg-gradient-to-br from-rose-950/40 to-slate-950 p-8">
-
-          <div class="absolute w-52 h-52 bg-rose-500/10 blur-3xl rounded-full -top-10 -right-10"></div>
-
-          <div class="relative z-10">
-
-            <div class="w-14 h-14 rounded-2xl bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 text-xl">
-              <i class="fa-solid fa-terminal"></i>
-            </div>
-
-            <span class="inline-block mt-6 text-[10px] uppercase tracking-widest bg-rose-500/10 border border-rose-500/20 px-2 py-1 rounded text-rose-400 mono">
-              Developer Zone
-            </span>
-
-            <h2 class="text-3xl font-black mt-4">
-              API Documentation
-            </h2>
-
-            <p class="text-sm text-slate-400 leading-7 mt-5">
-              Explore endpoints, payload structures, authentication methods, and interactive testing systems for developers.
-            </p>
-
-            <button class="mt-8 w-full py-4 rounded-xl bg-gradient-to-r from-rose-500 to-indigo-600 font-bold tracking-wider shadow-lg">
-              OPEN DOCS
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- LOG TABLE -->
-
-      <div class="glass rounded-2xl overflow-hidden">
-
-        <div class="px-8 py-5 border-b border-slate-800 flex items-center justify-between">
-
-          <div>
-
-            <h3 class="font-bold uppercase tracking-widest text-sm">
-              Live Server Logs
-            </h3>
-
-            <p class="text-xs text-slate-500 mt-1">
-              Realtime execution monitoring feed.
-            </p>
-
-          </div>
-
-          <div class="flex items-center gap-2 text-emerald-400 text-xs mono">
-
-            <div class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></div>
-
-            LIVE
-
-          </div>
-
-        </div>
-
-        <div class="overflow-x-auto">
-
-          <table class="w-full mono text-sm">
-
-            <thead class="bg-slate-950/70 text-slate-500 uppercase text-[11px] tracking-widest">
-
-              <tr>
-
-                <th class="px-8 py-4 text-left">
-                  Timestamp
-                </th>
-
-                <th class="px-8 py-4 text-left">
-                  Method
-                </th>
-
-                <th class="px-8 py-4 text-left">
-                  Endpoint
-                </th>
-
-                <th class="px-8 py-4 text-left">
-                  Status
-                </th>
-
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              <tr class="border-t border-slate-800 hover:bg-slate-900/40">
-
-                <td class="px-8 py-5 text-slate-400">
-                  22:41:09
-                </td>
-
-                <td class="px-8 py-5 text-emerald-400">
-                  GET
-                </td>
-
-                <td class="px-8 py-5">
-                  /api/ytdownloader
-                </td>
-
-                <td class="px-8 py-5 text-emerald-400">
-                  200 OK
-                </td>
-
-              </tr>
-
-              <tr class="border-t border-slate-800 hover:bg-slate-900/40">
-
-                <td class="px-8 py-5 text-slate-400">
-                  22:42:12
-                </td>
-
-                <td class="px-8 py-5 text-indigo-400">
-                  POST
-                </td>
-
-                <td class="px-8 py-5">
-                  /api/whatsapp-bot
-                </td>
-
-                <td class="px-8 py-5 text-emerald-400">
-                  201 CREATED
-                </td>
-
-              </tr>
-
-              <tr class="border-t border-slate-800 hover:bg-slate-900/40">
-
-                <td class="px-8 py-5 text-slate-400">
-                  22:43:27
-                </td>
-
-                <td class="px-8 py-5 text-purple-400">
-                  GET
-                </td>
-
-                <td class="px-8 py-5">
-                  /api/smm-panel
-                </td>
-
-                <td class="px-8 py-5 text-yellow-400">
-                  304 CACHE
-                </td>
-
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
+</div>
+
+<footer>
+    © siliguri-boy
+</footer>
+
+<script>
+function getDP(){
+
+    let number = document.getElementById("number").value;
+
+    if(number==""){
+        alert("Enter WhatsApp Number");
+        return;
+    }
+
+    let image =
+    "https://picsum.photos/300?random=" +
+    Math.floor(Math.random()*1000);
+
+    document.getElementById("dp").src = image;
+    document.getElementById("downloadBtn").href = image;
+    document.getElementById("result").style.display = "block";
+}
+</script>
 
 </body>
-          </html>
+</html>
