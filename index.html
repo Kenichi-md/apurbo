@@ -3,24 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APURBO-DAS DP Maker</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>WhatsApp DP Preview</title>
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:sans-serif;
 }
 
 body{
-min-height:100vh;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-padding:20px;
 overflow:hidden;
 background:#000;
 }
@@ -31,196 +28,113 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background-size:cover;
-background-position:center;
+background:url('https://i.imgur.com/maXzTgz.jpeg') center/cover;
 filter:blur(18px);
-transform:scale(1.1);
-z-index:-2;
-}
-
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.5);
+transform:scale(1.2);
 z-index:-1;
 }
 
-.container{
-width:100%;
-max-width:450px;
+.card{
+width:350px;
+backdrop-filter:blur(10px);
 background:rgba(255,255,255,.08);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.2);
 border-radius:25px;
 padding:20px;
-box-shadow:0 0 25px rgba(0,255,255,.2);
+text-align:center;
+color:white;
 }
 
-.logo{
-text-align:center;
-font-size:30px;
-font-weight:700;
-color:#00ffff;
-margin-bottom:20px;
+.dp{
+width:220px;
+height:220px;
+border-radius:50%;
+border:6px solid #25D366;
+object-fit:cover;
+margin:auto;
+display:block;
+}
+
+h2{
+margin-top:15px;
+font-size:22px;
+}
+
+p{
+opacity:.8;
+margin-top:5px;
 }
 
 input{
 width:100%;
 padding:12px;
-margin-bottom:12px;
+margin-top:15px;
 border:none;
+border-radius:10px;
 outline:none;
-border-radius:12px;
-background:rgba(255,255,255,.1);
+}
+
+.file{
+background:#25D366;
 color:white;
-}
-
-input::placeholder{
-color:#ddd;
-}
-
-.upload{
-width:100%;
-padding:14px;
-text-align:center;
-background:rgba(255,255,255,.08);
-border:2px dashed #00ffff;
-border-radius:12px;
 cursor:pointer;
-margin-bottom:12px;
-color:white;
 }
 
-.upload input{
-display:none;
-}
-
-button{
+.btn{
 width:100%;
 padding:12px;
+margin-top:15px;
 border:none;
-border-radius:12px;
-background:#00ffff;
-color:black;
-font-weight:700;
+border-radius:10px;
+background:#25D366;
+color:white;
+font-size:16px;
 cursor:pointer;
-margin-top:8px;
-}
-
-.preview{
-margin-top:15px;
-height:350px;
-border-radius:15px;
-overflow:hidden;
-background:#111;
-display:flex;
-justify-content:center;
-align-items:center;
-color:#aaa;
-}
-
-.preview img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.footer{
-text-align:center;
-margin-top:15px;
-font-size:13px;
-color:#ddd;
 }
 </style>
 </head>
 <body>
 
-<div class="bg" id="bg"></div>
-<div class="overlay"></div>
+<div class="bg"></div>
 
-<div class="container">
+<div class="card">
 
-<div class="logo">APURBO-DAS</div>
+<img id="preview"
+class="dp"
+src="https://i.imgur.com/2DhmtJ4.png">
 
-<input type="text" id="bgUrl" placeholder="https://i.imgur.com/maXzTgz.jpeg">
+<input type="text"
+placeholder="WhatsApp Number">
 
-<button onclick="setBackground()">
-Set Background
+<input type="file"
+id="fileInput"
+class="file"
+accept="image/*">
+
+<h2>⎯ ꯭᪳𝐀ᴘᴜʀʙᴏ-𝐃ᴀs⎯꯭̽⸙ ༎</h2>
+
+<p>© siliguri-boy</p>
+
+<button class="btn">
+Upload DP Preview
 </button>
-
-<br><br>
-
-<label class="upload">
-📷 Upload Image
-<input type="file" id="imageInput" accept="image/*">
-</label>
-
-<div class="preview" id="preview">
-Image Preview
-</div>
-
-<button onclick="downloadImage()">
-Download Image
-</button>
-
-<div class="footer">
-© siliguri-boy
-</div>
 
 </div>
 
 <script>
+const fileInput =
+document.getElementById('fileInput');
 
-let uploadedImage = "";
+const preview =
+document.getElementById('preview');
 
-function setBackground(){
-const url=document.getElementById("bgUrl").value.trim();
-
-if(!url){
-alert("Enter Image URL");
-return;
+fileInput.addEventListener('change',e=>{
+const file=e.target.files[0];
+if(file){
+preview.src=
+URL.createObjectURL(file);
 }
-
-document.getElementById("bg").style.backgroundImage=
-`url('${url}')`;
-}
-
-document.getElementById("imageInput")
-.addEventListener("change",function(){
-
-const file=this.files[0];
-
-if(!file) return;
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-uploadedImage=e.target.result;
-
-document.getElementById("preview").innerHTML=
-`<img src="${uploadedImage}">`;
-
-}
-
-reader.readAsDataURL(file);
-
 });
-
-function downloadImage(){
-
-if(!uploadedImage){
-alert("Upload image first");
-return;
-}
-
-const a=document.createElement("a");
-a.href=uploadedImage;
-a.download="APURBO-DAS.png";
-a.click();
-
-}
-
 </script>
 
 </body>
