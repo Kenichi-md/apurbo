@@ -3,138 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WhatsApp DP Preview</title>
+<title>WhatsApp Button</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:sans-serif;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-background:#000;
+/* Red Button */
+#waBtn {
+    background: red;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.bg{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:url('https://i.imgur.com/maXzTgz.jpeg') center/cover;
-filter:blur(18px);
-transform:scale(1.2);
-z-index:-1;
+/* Popup box */
+#menu {
+    display: none;
+    position: absolute;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    margin-top: 10px;
 }
 
-.card{
-width:350px;
-backdrop-filter:blur(10px);
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.2);
-border-radius:25px;
-padding:20px;
-text-align:center;
-color:white;
+#menu button {
+    display: block;
+    width: 150px;
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.dp{
-width:220px;
-height:220px;
-border-radius:50%;
-border:6px solid #25D366;
-object-fit:cover;
-margin:auto;
-display:block;
-}
-
-h2{
-margin-top:15px;
-font-size:22px;
-}
-
-p{
-opacity:.8;
-margin-top:5px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:15px;
-border:none;
-border-radius:10px;
-outline:none;
-}
-
-.file{
-background:#25D366;
-color:white;
-cursor:pointer;
-}
-
-.btn{
-width:100%;
-padding:12px;
-margin-top:15px;
-border:none;
-border-radius:10px;
-background:#25D366;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
+.sms { background: #4CAF50; color: white; }
+.hi { background: #2196F3; color: white; }
 </style>
 </head>
+
 <body>
 
-<div class="bg"></div>
+<button id="waBtn">WhatsApp Message</button>
 
-<div class="card">
-
-<img id="preview"
-class="dp"
-src="https://i.imgur.com/2DhmtJ4.png">
-
-<input type="text"
-placeholder="WhatsApp Number">
-
-<input type="file"
-id="fileInput"
-class="file"
-accept="image/*">
-
-<h2>⎯ ꯭᪳𝐀ᴘᴜʀʙᴏ-𝐃ᴀs⎯꯭̽⸙ ༎</h2>
-
-<p>© siliguri-boy</p>
-
-<button class="btn">
-Upload DP Preview
-</button>
-
+<div id="menu">
+    <button class="sms" onclick="sendMsg('Hello')">SMS Send</button>
+    <button class="hi" onclick="sendMsg('Hi')">Hi SMS Send</button>
 </div>
 
 <script>
-const fileInput =
-document.getElementById('fileInput');
+// Background image URL (change here)
+let bgUrl = "https://images.unsplash.com/photo-1520975916090-3105956dac38";
+document.body.style.backgroundImage = "url('" + bgUrl + "')";
 
-const preview =
-document.getElementById('preview');
+let btn = document.getElementById("waBtn");
+let menu = document.getElementById("menu");
 
-fileInput.addEventListener('change',e=>{
-const file=e.target.files[0];
-if(file){
-preview.src=
-URL.createObjectURL(file);
+btn.onclick = function() {
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
-});
+
+function sendMsg(text) {
+    let number = "918967360566";
+    let url = "https://wa.me/" + number + "?text=" + encodeURIComponent(text);
+    window.open(url, "_blank");
+    menu.style.display = "none";
+}
 </script>
 
 </body>
