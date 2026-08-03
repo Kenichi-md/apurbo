@@ -1,107 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>PUTTUS-AI Pair Code</title>
-
-<style>
-body{
-background:#0b0f17;
-font-family:Arial,sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
-color:#fff;
-}
-.box{
-width:340px;
-background:#141b25;
-padding:25px;
-border-radius:15px;
-text-align:center;
-box-shadow:0 0 20px rgba(0,255,170,.3);
-}
-input{
-width:100%;
-padding:12px;
-margin:15px 0;
-border:none;
-border-radius:8px;
-background:#1f2937;
-color:#fff;
-font-size:16px;
-}
-button{
-width:100%;
-padding:12px;
-background:#00ff99;
-color:#000;
-font-weight:bold;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-#code{
-margin-top:20px;
-font-size:22px;
-font-weight:bold;
-color:#00ff99;
-word-break:break-all;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarvis</title>
+  <script type="module" crossorigin src="/assets/index-C0d_cMbs.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-0Ey2RF8J.css">
 </head>
-
 <body>
-
-<div class="box">
-<h2>PUTTUS-AI</h2>
-
-<input
-id="number"
-placeholder="917679218662">
-
-<button onclick="getCode()">
-Generate Pair Code
-</button>
-
-<div id="code"></div>
-
-</div>
-
-<script>
-async function getCode(){
-
-const number=document.getElementById("number").value.trim();
-
-if(number==""){
-alert("Enter WhatsApp Number");
-return;
-}
-
-document.getElementById("code").innerHTML="Loading...";
-
-try{
-
-const res=await fetch("/code?number="+number);
-
-// যদি API অন্য domain এ থাকে:
-// const res=await fetch("https://YOUR-DOMAIN.com/code?number="+number);
-
-const data=await res.json();
-
-document.getElementById("code").innerHTML=data.code;
-
-}catch(e){
-
-document.getElementById("code").innerHTML="Failed to get Pair Code";
-
-}
-
-}
-</script>
-
+  <div id="root"></div>
 </body>
 </html>
