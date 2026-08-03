@@ -1,75 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PUTTUS-AI Pair Code</title>
+
 <style>
 body{
-margin:0;
-background:#0d1117;
+background:#0b0f17;
 font-family:Arial,sans-serif;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-color:white;
+margin:0;
+color:#fff;
 }
 .box{
-background:#161b22;
-padding:30px;
+width:340px;
+background:#141b25;
+padding:25px;
 border-radius:15px;
-width:320px;
 text-align:center;
-box-shadow:0 0 20px #00ff99;
+box-shadow:0 0 20px rgba(0,255,170,.3);
 }
 input{
-width:90%;
+width:100%;
 padding:12px;
 margin:15px 0;
 border:none;
 border-radius:8px;
+background:#1f2937;
+color:#fff;
 font-size:16px;
 }
 button{
-padding:12px 25px;
+width:100%;
+padding:12px;
+background:#00ff99;
+color:#000;
+font-weight:bold;
 border:none;
 border-radius:8px;
-background:#00ff99;
-font-size:16px;
 cursor:pointer;
-font-weight:bold;
 }
-#result{
+#code{
 margin-top:20px;
-font-size:18px;
+font-size:22px;
+font-weight:bold;
 color:#00ff99;
+word-break:break-all;
 }
 </style>
 </head>
+
 <body>
 
 <div class="box">
 <h2>PUTTUS-AI</h2>
-<p>Enter WhatsApp Number</p>
 
-<input type="text" id="number" placeholder="918967360566">
+<input
+id="number"
+placeholder="917679218662">
 
-<button onclick="pair()">Generate Pair Code</button>
+<button onclick="getCode()">
+Generate Pair Code
+</button>
 
-<div id="result"></div>
+<div id="code"></div>
+
 </div>
 
 <script>
-function pair(){
-const num=document.getElementById("number").value;
+async function getCode(){
 
-if(!num){
-document.getElementById("result").innerHTML="Enter a valid number";
+const number=document.getElementById("number").value.trim();
+
+if(number==""){
+alert("Enter WhatsApp Number");
 return;
 }
 
-document.getElementById("result").innerHTML="Backend Required!";
+document.getElementById("code").innerHTML="Loading...";
+
+try{
+
+const res=await fetch("/code?number="+number);
+
+// যদি API অন্য domain এ থাকে:
+// const res=await fetch("https://YOUR-DOMAIN.com/code?number="+number);
+
+const data=await res.json();
+
+document.getElementById("code").innerHTML=data.code;
+
+}catch(e){
+
+document.getElementById("code").innerHTML="Failed to get Pair Code";
+
+}
+
 }
 </script>
 
